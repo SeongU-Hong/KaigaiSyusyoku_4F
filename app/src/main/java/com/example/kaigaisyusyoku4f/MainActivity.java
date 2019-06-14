@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         tabLayout.setupWithViewPager(viewPager);
 
-        fab();              //Float버튼 실행
+        fab();              //Float버튼 실행ll
         navigation();
         writeBoard();
         searchBoard();
