@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">KaigaiSyusyoku4F</string>
+    <string name="app_name">해외취업 아카데미</string>
+    <string name="navMenu1">메뉴1</string>
+    <string name="navMenu2">메뉴2</string>
 </resources>
