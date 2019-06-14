@@ -36,7 +36,7 @@ public class FreeBoard extends Fragment {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
 
-       /* mList = new ArrayList();
+        mList = new ArrayList();
         mListView = (ListView) view.findViewById(R.id.listView1);
         mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
         mListView.setAdapter(mAdapter);
@@ -52,7 +52,7 @@ public class FreeBoard extends Fragment {
                 mAdapter.notifyDataSetChanged();        //어댑터 새로고침(갱신)
                 editText.setText("");
             }
-        });*/
+        });
 
 
         return view;
