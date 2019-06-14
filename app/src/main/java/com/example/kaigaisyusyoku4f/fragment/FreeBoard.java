@@ -35,26 +35,6 @@ public class FreeBoard extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
-
-        mList = new ArrayList();
-        mListView = (ListView) view.findViewById(R.id.listView1);
-        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
-        mListView.setAdapter(mAdapter);
-
-        btn=(Button)view.findViewById(R.id.testBtn);
-        editText=(EditText)view.findViewById(R.id.testInput);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String str=editText.getText().toString();
-                mList.add(str);
-                mAdapter.notifyDataSetChanged();        //어댑터 새로고침(갱신)
-                editText.setText("");
-            }
-        });
-
-
         return view;
     }
 }

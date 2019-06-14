@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KaigaiSyusyoku4F</string>
+    <string name="navMenu1">메뉴1</string>
+    <string name="navMenu2">메뉴2</string>
 </resources>
