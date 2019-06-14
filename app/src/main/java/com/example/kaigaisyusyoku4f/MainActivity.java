@@ -1,5 +1,6 @@
 package com.example.kaigaisyusyoku4f;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -21,7 +22,6 @@ import com.example.kaigaisyusyoku4f.fragment.MyPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button btn1, btn2, btn3, btn4;
     private MyPagerAdapter myPagerAdapter;
     private ViewPager viewPager;
     private Animation fab_open, fab_close;
@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Toolbar toolbar;
     private NavigationView nav;
     private DrawerLayout drawerLayout;
-    private MenuItem navItem1, navItem2;
+    private FloatingActionButton writeBoardBtn;
+    private FloatingActionButton searchBoardBtn;
+
 
 
     @Override
@@ -50,7 +52,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fab();              //Float버튼 실행
         navigation();
+        writeBoard();
+        searchBoard();
+    }
 
+    private void searchBoard() {
+        searchBoardBtn=(FloatingActionButton)findViewById(R.id.fab1);
+        searchBoardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), SearchBoardActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    //글쓰기 버튼 클릭
+    private void writeBoard() {
+        writeBoardBtn=(FloatingActionButton)findViewById(R.id.fab2);
+        writeBoardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(), WriteBoardActivity.class);
+                //해당 인텐트 실행
+                startActivity(intent);
+            }
+        });
     }
 
     public void navigation() {
