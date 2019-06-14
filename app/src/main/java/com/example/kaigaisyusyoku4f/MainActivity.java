@@ -33,8 +33,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton writeBoardBtn;
     private FloatingActionButton searchBoardBtn;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
         tabLayout.setupWithViewPager(viewPager);
 
-        fab();              //Float버튼 실행ll
+        fab();              //Float버튼 실행
         navigation();
         writeBoard();
         searchBoard();
