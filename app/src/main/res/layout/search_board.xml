@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#DEE6FF">
 
-    <TextView
+<android.support.v7.widget.Toolbar
+    android:id="@+id/searchToolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFF172"
+    >
+</android.support.v7.widget.Toolbar>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/searchWord"
+        android:layout_weight="8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="아오오오"/>
+        android:hint="제목"
+        android:textSize="20dp"/>
 
-</FrameLayout>
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="검색"
+        android:textSize="20dp"/>
+
+</LinearLayout>
+
+</LinearLayout>
