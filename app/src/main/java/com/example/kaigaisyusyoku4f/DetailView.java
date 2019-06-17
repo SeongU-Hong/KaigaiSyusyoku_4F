@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +23,8 @@ public class DetailView extends Activity {
     static ListView cListView;
     static ArrayAdapter mAdapter;
 
-    @Override
+    private Toolbar toolbar;
+      @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_view);
@@ -56,5 +59,10 @@ public class DetailView extends Activity {
         cListView = (ListView) findViewById(R.id.commentList);
         mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cList);
         cListView.setAdapter(mAdapter);
+
+
     }
+
+
+
 }
