@@ -24,8 +24,8 @@ import java.util.ArrayList;
 public class FreeBoard extends Fragment {
 
     public static ArrayList<FreeboardVO> mList;
-    static ListView mListView;
-    static ArrayAdapter mAdapter;
+    public static ListView mListView;
+    public static ArrayAdapter mAdapter;
 
 
     public FreeBoard() {
