@@ -16,7 +16,7 @@
             android:id="@+id/writeToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFF172"></android.support.v7.widget.Toolbar>
+            android:background="#3489B6"></android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
