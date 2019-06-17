@@ -25,6 +25,7 @@
             android:background="@color/color7">
 
             <EditText
+                android:id="@+id/freeBoard_title"
                 android:padding="5dp"
                 android:inputType="textMultiLine|textNoSuggestions"
                 android:layout_width="match_parent"
@@ -35,6 +36,7 @@
                 android:background="@drawable/edit_shape"/>
 
             <EditText
+                android:id="@+id/freeBoard_contents"
                 android:padding="5dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"

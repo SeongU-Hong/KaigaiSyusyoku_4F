@@ -1,5 +1,6 @@
 package com.example.kaigaisyusyoku4f.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,16 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
+import com.example.kaigaisyusyoku4f.DetailView;
 import com.example.kaigaisyusyoku4f.R;
-import com.example.kaigaisyusyoku4f.VO.ListItemTest;
+import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
+
+import java.util.ArrayList;
 
 public class FreeBoard extends Fragment {
 
-    private ListView listView;
-    private FreeListViewAdapter freeListViewAdapter;
+    public static ArrayList<FreeboardVO> mList;
+    static ListView mListView;
+    static ArrayAdapter mAdapter;
 
 
     public FreeBoard() {
@@ -29,37 +37,30 @@ public class FreeBoard extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
+        mList = new ArrayList();
+        mListView = (ListView) view.findViewById(R.id.listView1);
+        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
+        mListView.setAdapter(mAdapter);
 
-        //리스트뷰
-        // Adapter 생성
-        freeListViewAdapter = new FreeListViewAdapter();
-
-        // 리스트뷰 참조 및 Adapter달기
-        listView = (ListView) view.findViewById(R.id.listView1);
-        listView.setAdapter(freeListViewAdapter);
-
-        //아이쳄 추가
-        freeListViewAdapter.addItem("안뇽", "20190303", 10, 4);
-        freeListViewAdapter.addItem("죽고싶냐", "20190513", 8, 3);
-        freeListViewAdapter.addItem("잡페어가즈아", "20190701", 7, 1);
-
-        //리스트뷰 클릭이벤트
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                ListItemTest item = (ListItemTest) parent.getItemAtPosition(position);
+            public void onItemClick(AdapterView parent, View view, int i, long l) {
+                Intent intent = new Intent(getContext(), DetailView.class);
+                intent.putExtra("id",String.valueOf(mList.get(i).getId()));
+                intent.putExtra("title",mList.get(i).getTitle());
+                //Log.d(mList.get(i).getTitle(),"title");
+                intent.putExtra("contents",mList.get(i).getContents());
+                intent.putExtra("dateTime",mList.get(i).getDateTime());
+                mList.get(i).setCount(mList.get(i).getCount()+1);
+                intent.putExtra("count",String.valueOf(mList.get(i).getCount()));
+                //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
+                Toast.makeText(getContext(), "클릭"+mList.get(i).getCount(), Toast.LENGTH_SHORT).show();
+                startActivity(intent);
 
-                String title = item.getTitle();
-                String date = item.getDate();
-                int hit = item.getHit();
-                int comment = item.getComment();
-
-                //여기에 코드 작성
-                // TODO : use item data.
             }
         });
 
         return view;
     }
+
 }
