@@ -10,25 +10,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/testInput"
-            android:layout_weight="8"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp" />
-
-        <Button
-            android:id="@+id/testBtn"
-            android:text="버튼꾹!"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="자유게시판입니다."
+            android:textSize="30dp"/>
 
     </LinearLayout>
 
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>
