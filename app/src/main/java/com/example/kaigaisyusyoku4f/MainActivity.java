@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         nav = (NavigationView) findViewById(R.id.navigationView);
         nav.bringToFront();     //네비게이션 레이어 최상으로 올림
-        nav.setBackgroundResource(R.color.color7);
+        nav.setBackgroundResource(R.color.color3);
         nav.setItemTextColor(getResources().getColorStateList(android.R.color.black));
 
         // 툴바 생성 및 세팅하는 부분
