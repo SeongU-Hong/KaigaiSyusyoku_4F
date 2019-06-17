@@ -16,9 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".WriteBoardActivity"/>
-        <activity android:name=".SearchBoardActivity"/>
+        <activity android:name=".WriteBoardActivity" />
+        <activity android:name=".SearchBoardActivity" />
     </application>
 
 </manifest>
