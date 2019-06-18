@@ -35,14 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton writeBoardBtn;
     private FloatingActionButton searchBoardBtn;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-
         viewPager = (ViewPager) findViewById(R.id.container);
         viewPager.setAdapter(myPagerAdapter);
 
@@ -58,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void searchBoard() {
-        searchBoardBtn = (FloatingActionButton) findViewById(R.id.fab1);
+        searchBoardBtn=(FloatingActionButton)findViewById(R.id.fab1);
         searchBoardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SearchBoardActivity.class);
+                Intent intent=new Intent(getApplicationContext(), SearchBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -70,11 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //글쓰기 버튼 클릭
     private void writeBoard() {
-        writeBoardBtn = (FloatingActionButton) findViewById(R.id.fab2);
+        writeBoardBtn=(FloatingActionButton)findViewById(R.id.fab2);
         writeBoardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), WriteBoardActivity.class);
+                Intent intent=new Intent(getApplicationContext(), WriteBoardActivity.class);
                 //해당 인텐트 실행
                 startActivity(intent);
             }
@@ -95,35 +93,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         actionBar.setHomeAsUpIndicator(R.drawable.berger);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        // 네비게이션 뷰 아이템 클릭시 이뤄지는 이벤트
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            // 네비게이션 뷰 아이템 클릭시 이뤄지는 이벤트
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 DrawerLayout drawer = findViewById(R.id.drawerLayout);
                 drawer.closeDrawer(GravityCompat.START);
+//                item.setChecked(true);
+//                drawerLayout.closeDrawers();
 
                 // Handle navigation view item clicks here.
                 int id = item.getItemId();
+                //@jsm 왜 온클릭 안되는지 디버깅용으로 추가
+                Log.d("onclick work?", id + "");
+                Toast.makeText(MainActivity.this, "id: " + id + "has clicked", Toast.LENGTH_LONG).show();
 
-                if (id == R.id.navigationItem1) {
-                    Toast.makeText(getApplicationContext(), "테스트", Toast.LENGTH_SHORT).show();
-                    Log.d("네비게이션", "onNavigationItemSelected: ");
+                // 각 메뉴 클릭시 이뤄지는 이벤트
 
-                    // Handle the camera action
-                } else if (id == R.id.navigationItem2) {
-                }
+                    if (id == R.id.navigationItem1) {
+                        Toast.makeText(getApplicationContext(), "테스트", Toast.LENGTH_SHORT).show();
+                        Log.d("네비게이션", "onNavigationItemSelected: ");
 
-                return true;
+                        // Handle the camera action
+                    } else if (id == R.id.navigationItem2) {
+//              do something
+                    } else if (id == R.id.navigationUser2) {
+//              do something
+                    } else if (id == R.id.navigationUser3) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else if (id == R.id.navigationUser4) {
+//              do something
+                    } else if (id == R.id.navigationUser5) {
+//              do something
+                    }
+                    return true;
             }
         });
     }
+
 
     // 햄버거 버튼 클릭 시 드로어 열리도록 하는 곳
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id) {
+        switch (id){
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
