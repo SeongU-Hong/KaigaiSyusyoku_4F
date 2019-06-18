@@ -8,16 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.VO.ListItemTest;
-
-import java.util.ArrayList;
 
 public class FreeBoard extends Fragment {
 

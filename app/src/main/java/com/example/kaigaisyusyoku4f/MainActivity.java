@@ -1,7 +1,6 @@
 package com.example.kaigaisyusyoku4f;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -56,11 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void searchBoard() {
-        searchBoardBtn=(FloatingActionButton)findViewById(R.id.fab1);
+        searchBoardBtn = (FloatingActionButton) findViewById(R.id.fab1);
         searchBoardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), SearchBoardActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SearchBoardActivity.class);
                 startActivity(intent);
             }
         });
@@ -68,11 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //글쓰기 버튼 클릭
     private void writeBoard() {
-        writeBoardBtn=(FloatingActionButton)findViewById(R.id.fab2);
+        writeBoardBtn = (FloatingActionButton) findViewById(R.id.fab2);
         writeBoardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(), WriteBoardActivity.class);
+                Intent intent = new Intent(getApplicationContext(), WriteBoardActivity.class);
                 //해당 인텐트 실행
                 startActivity(intent);
             }
@@ -110,25 +109,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 // 각 메뉴 클릭시 이뤄지는 이벤트
 
-                    if (id == R.id.navigationItem1) {
-                        Toast.makeText(getApplicationContext(), "테스트", Toast.LENGTH_SHORT).show();
-                        Log.d("네비게이션", "onNavigationItemSelected: ");
+                if (id == R.id.navigationItem1) {
+                    Toast.makeText(getApplicationContext(), "테스트", Toast.LENGTH_SHORT).show();
+                    Log.d("네비게이션", "onNavigationItemSelected: ");
 
-                        // Handle the camera action
-                    } else if (id == R.id.navigationItem2) {
+                    // Handle the camera action
+                } else if (id == R.id.navigationItem2) {
 //              do something
-                    } else if (id == R.id.navigationUser2) {
+                } else if (id == R.id.navigationUser2) {
 //              do something
-                    } else if (id == R.id.navigationUser3) {
-                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else if (id == R.id.navigationUser4) {
+                } else if (id == R.id.navigationUser3) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if (id == R.id.navigationUser4) {
 //              do something
-                    } else if (id == R.id.navigationUser5) {
+                } else if (id == R.id.navigationUser5) {
 //              do something
-                    }
-                    return true;
+                }
+                return true;
             }
         });
     }
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;

@@ -7,13 +7,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
 
-    public MyPagerAdapter(FragmentManager fm){
+    public MyPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int i) {
-        switch(i){
+        switch (i) {
             case 0:
                 return new FreeBoard();
             case 1:
@@ -30,7 +30,7 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return "자유게시판";
             case 1:

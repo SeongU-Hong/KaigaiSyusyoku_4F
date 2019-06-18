@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 
-
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     // google login result
     private static final int RC_SIGN_IN = 900;
@@ -125,7 +124,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     }
                 });
     }
-
 
 
     // [START signin]
