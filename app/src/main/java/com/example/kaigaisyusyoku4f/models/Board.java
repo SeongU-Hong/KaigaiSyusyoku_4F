@@ -5,6 +5,7 @@ public class Board {
     public String title;
     public String contents;
     public long count;
+    public long replyCount;
     public String dateTime;
     public String flag;
 
@@ -40,6 +41,14 @@ public class Board {
         this.count = count;
     }
 
+    public long getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(long replyCount) {
+        this.replyCount = replyCount;
+    }
+
     public String getDateTime() {
         return dateTime;
     }
@@ -63,6 +72,7 @@ public class Board {
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
                 ", count=" + count +
+                ", replyCount=" + replyCount +
                 ", dateTime='" + dateTime + '\'' +
                 ", flag='" + flag + '\'' +
                 '}';
