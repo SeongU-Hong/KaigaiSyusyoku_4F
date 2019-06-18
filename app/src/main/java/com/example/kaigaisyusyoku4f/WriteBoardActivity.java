@@ -26,11 +26,11 @@ public class WriteBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.write_board);
-        toolbar = (Toolbar) findViewById(R.id.writeToolbar);
+            setContentView(R.layout.write_board);
+        toolbar =(Toolbar) findViewById(R.id.writeToolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);      //뒤로가기 버튼
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         toolbar.setTitle("해외취업 아카데미");
         toolbar.setSubtitle("글작성");
@@ -62,12 +62,11 @@ public class WriteBoardActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        switch(item.getItemId()){
             case android.R.id.home:
                 finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
