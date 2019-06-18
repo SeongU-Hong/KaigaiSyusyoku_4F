@@ -16,13 +16,13 @@ import java.util.Date;
 
 public class FireBaseBasement {
 
-    private String id = "";
-    private Date today = new Date();
-    private SimpleDateFormat date = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ssSS");
-    private String title = "";
-    private String contents = "";
-
-    private String flag = "0";
+//    private String id = "";
+//    private Date today = new Date();
+//    private SimpleDateFormat date = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ssSS");
+//    private String title = "";
+//    private String contents = "";
+//
+//    private String flag = "0";
     private DatabaseReference mDatabase;
 
 
@@ -31,9 +31,9 @@ public class FireBaseBasement {
 
     public void uploadBoard(Board board) {
 
-        String dateTime = date.format(today);
-        board.setDateTime(dateTime);
-        board.setFlag("0");
+        String dateTime = board.getDateTime();
+//        board.setDateTime(dateTime);
+//        board.setFlag("0");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child(board.getId()).child(dateTime).setValue(board, new DatabaseReference.CompletionListener() {
 

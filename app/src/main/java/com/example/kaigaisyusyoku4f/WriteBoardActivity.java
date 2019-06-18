@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
+import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
+import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.Date;
 public class WriteBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    static ArrayList<FreeboardVO> mList = FreeBoard.mList;
+    static ArrayList<Board> mList = FreeBoard.mList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,9 +50,11 @@ public class WriteBoardActivity extends AppCompatActivity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
                 String inputDateTime = sdf.format(date);
 
-                FreeboardVO vo = new FreeboardVO("1",inputTitle,inputContent,inputDateTime,"0",0,0);
+                Board vo = new Board("1",inputTitle,inputContent,inputDateTime,"0",0,0);
 
                 mList.add(vo);
+                FireBaseBasement fbb = new FireBaseBasement();
+                fbb.uploadBoard(vo);
                 finish();
             }
         });

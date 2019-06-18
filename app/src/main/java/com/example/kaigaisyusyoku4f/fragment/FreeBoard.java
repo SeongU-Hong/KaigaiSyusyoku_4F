@@ -18,12 +18,13 @@ import android.widget.Toast;
 import com.example.kaigaisyusyoku4f.DetailView;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
+import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;
 
 public class FreeBoard extends Fragment {
 
-    public static ArrayList<FreeboardVO> mList;
+    public static ArrayList<Board> mList;
     public static ListView mListView;
     public static ArrayAdapter mAdapter;
 
