@@ -26,7 +26,7 @@ public class WriteBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.write_board);
+            setContentView(R.layout.write_board);
         toolbar =(Toolbar) findViewById(R.id.writeToolbar);
 
         setSupportActionBar(toolbar);
