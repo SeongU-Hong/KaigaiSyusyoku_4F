@@ -3,11 +3,29 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/navigationUser2"
+            android:title="@string/navMenuUser2" />
+        <item
+            android:id="@+id/navigationUser3"
+            android:title="@string/navMenuUser3" />
+    <!--</group>
 
+    <group android:checkableBehavior="single">-->
+        <item
             android:id="@+id/navigationItem1"
-            android:title="@string/navMenu1" />
+            android:title="@string/navMenuBoard1" />
         <item
             android:id="@+id/navigationItem2"
-            android:title="@string/navMenu2" />
+            android:title="@string/navMenuBoard2" />
+    <!--</group>
+
+    <group android:checkableBehavior="single">-->
+        <item
+            android:id="@+id/navigationUser4"
+            android:title="@string/navMenuUser4" />
+        <item
+            android:id="@+id/navigationUser5"
+            android:title="@string/navMenuUser5" />
     </group>
+
 </menu>

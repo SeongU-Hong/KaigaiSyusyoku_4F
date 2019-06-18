@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(getApplicationContext(), WriteBoardActivity.class);
+                Toast.makeText(MainActivity.this,"writeboard btn click test", Toast.LENGTH_LONG).show();
                 //해당 인텐트 실행
                 startActivity(intent);
             }
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         nav = (NavigationView) findViewById(R.id.navigationView);
+        nav.bringToFront();
 
         // 툴바 생성 및 세팅하는 부분
         setSupportActionBar(toolbar);
@@ -93,17 +96,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 item.setChecked(true);
-                //drawerLayout.closeDrawers();
+                drawerLayout.closeDrawers();
 
                 int id = item.getItemId();
+                //@jsm 왜 온클릭 안되는지 디버깅용으로 추가
+                Log.d("onclick work?" , id + "");
+                Toast.makeText(MainActivity.this, "id: " + id + "has clicked", Toast.LENGTH_LONG).show();
+
                 // 각 메뉴 클릭시 이뤄지는 이벤트
                 switch (id){
                     case R.id.navigationItem1:
-                        Toast.makeText(MainActivity.this,"메뉴1 잘됨", Toast.LENGTH_LONG).show();
                         break;
 
                     case R.id.navigationItem2:
-                        Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                        break;
+
+                    // @jsm 햄버거 user관련 기능동작 연결 (쪽지함, 알림, 설정, logout)
+                    case R.id.navigationUser1:
+
+                        break;
+
+                    case R.id.navigationUser2:
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                    case R.id.navigationUser3:
+                        break;
+
+                    case R.id.navigationUser4:
+                        break;
+
+                    case R.id.navigationUser5:
                         break;
                 }
 

@@ -1,19 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="140dp"
     android:background="?attr/colorPrimaryDark"
+    android:gravity="bottom"
     android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:gravity="bottom">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <TextView
-        android:layout_width="match_parent"
+    <!--
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="141dp"
         android:layout_height="wrap_content"
-        android:text="로그인오네가이시마스"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:layout_weight="@android:dimen/notification_large_icon_height"
+        android:visibility="visible"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+    -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <Button
+        android:id="@+id/navigationUser1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/navMenuUser1" />
 
 </LinearLayout>
