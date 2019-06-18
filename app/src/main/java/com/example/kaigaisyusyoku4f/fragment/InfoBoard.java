@@ -7,19 +7,56 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.example.kaigaisyusyoku4f.InfoListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
+import com.example.kaigaisyusyoku4f.VO.ListItemTest;
 
 public class InfoBoard extends Fragment {
 
-    public InfoBoard(){
+    private InfoListViewAdapter infoListViewAdapter;
+    private ListView listView;
+
+    public InfoBoard() {
 
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.info_board, container, false);
+        View view = inflater.inflate(R.layout.info_board, container, false);
+
+        //리스트뷰
+        // Adapter 생성
+        infoListViewAdapter = new InfoListViewAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        listView = (ListView) view.findViewById(R.id.listView2);
+        listView.setAdapter(infoListViewAdapter);
+
+        //아이쳄 추가
+        infoListViewAdapter.addItem("정보", "20190303", 10, 2);
+        infoListViewAdapter.addItem("좋은정보", "20190513", 8, 0);
+        infoListViewAdapter.addItem("좋지않은정보", "20190701", 7, 1);
+
+        //리스트뷰 클릭이벤트
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // get item
+                ListItemTest item = (ListItemTest) parent.getItemAtPosition(position);
+
+                String title = item.getTitle();
+                String date = item.getDate();
+                int hit = item.getHit();
+                int comment = item.getComment();
+
+                //여기에 코드 작성
+                // TODO : use item data.
+            }
+        });
         return view;
     }
 
