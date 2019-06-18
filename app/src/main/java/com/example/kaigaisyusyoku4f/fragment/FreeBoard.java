@@ -44,8 +44,8 @@ public class FreeBoard extends Fragment {
         listView.setAdapter(freeListViewAdapter);
 
         //아이쳄 추가
-        freeListViewAdapter.addItem("안뇽", "20190303", 10, 2);
-        freeListViewAdapter.addItem("죽고싶냐", "20190513", 8, 0);
+        freeListViewAdapter.addItem("안뇽", "20190303", 10, 4);
+        freeListViewAdapter.addItem("죽고싶냐", "20190513", 8, 3);
         freeListViewAdapter.addItem("잡페어가즈아", "20190701", 7, 1);
 
         //리스트뷰 클릭이벤트
