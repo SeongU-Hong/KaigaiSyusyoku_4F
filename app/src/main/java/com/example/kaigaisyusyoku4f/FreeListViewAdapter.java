@@ -48,7 +48,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         freeListTitle.setText(listItemTest.getTitle());
         freeListDate.setText(listItemTest.getDate());
-        freeListHit.setText("조회수:"+String.valueOf(listItemTest.getHit()));
+        freeListHit.setText("조회수:" + String.valueOf(listItemTest.getHit()));
         freeListComment.setText(String.valueOf(listItemTest.getComment()));
 
         return convertView;

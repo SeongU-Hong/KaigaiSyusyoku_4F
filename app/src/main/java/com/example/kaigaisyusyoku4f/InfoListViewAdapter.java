@@ -48,7 +48,7 @@ public class InfoListViewAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         infoListTitle.setText(listItemTest.getTitle());
         infoListDate.setText(listItemTest.getDate());
-        infoListHit.setText("조회수:"+String.valueOf(listItemTest.getHit()));
+        infoListHit.setText("조회수:" + String.valueOf(listItemTest.getHit()));
         infoListComment.setText(String.valueOf(listItemTest.getComment()));
 
         return convertView;
