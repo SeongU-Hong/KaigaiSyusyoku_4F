@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class FreeBoard extends Fragment {
     public static ArrayList<Board> mList;
     public static ListView mListView;
     public static ArrayAdapter mAdapter;
-
+    public static ArrayList<String> List;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
@@ -54,25 +55,32 @@ public class FreeBoard extends Fragment {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
         mList = new ArrayList<Board>();
+        List = new ArrayList<>();
         mListView = (ListView) view.findViewById(R.id.listView1);
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<Board>());
+        initDatabase();
+        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, List);
         mListView.setAdapter(mAdapter);
 
+        mReference = mDatabase.child ("freeboard");
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
+                mAdapter.clear();
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
-                    Board msg2 = (Board) messageData.child("freeboard").child("write").getValue();
-                    mList.add(msg2);
-                    mAdapter.add(msg2);
+                    if(messageData.child("freeboard").child("write").exists()){
+                        String msg2 = messageData.child("freeboard").child("write").child("title").getValue().toString();
+                        Log.e(msg2.toString()+"","board :");
+                        List.add(msg2);
+                        mAdapter.add(msg2);
+                    }
                     // child 내에 있는 데이터만큼 반복합니다.
-
+                    mAdapter.notifyDataSetChanged();
+                    mListView.setSelection(mAdapter.getCount() - 1);
                 }
-                mAdapter.notifyDataSetChanged();
-                mListView.setSelection(mAdapter.getCount() - 1);
+
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -103,4 +111,45 @@ public class FreeBoard extends Fragment {
         return view;
     }
 
+    private void initDatabase() {
+        mDatabase = FirebaseDatabase.getInstance();
+
+        mReference = mDatabase.getReference("freeboard");
+
+        mChild = new ChildEventListener() {
+
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        };
+        mReference.addChildEventListener(mChild);
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mReference.removeEventListener(mChild);
+    }
 }
+

@@ -28,6 +28,7 @@ public class WriteBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     static ArrayList<Board> mList = FreeBoard.mList;
+    static ArrayList<String> List = FreeBoard.List;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,8 @@ public class WriteBoardActivity extends AppCompatActivity {
 
                 mList.add(vo);
 //                System.out.println("vo더하기");
+                List.add(vo.getTitle());//test
+
                 FireBaseBasement fbb = new FireBaseBasement();
 
                 fbb.uploadBoard(vo);
