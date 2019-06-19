@@ -73,6 +73,7 @@ public class InfoBoard extends Fragment {
                 swipe.setRefreshing(false);
             }
         });
+
         return view;
     }
 
