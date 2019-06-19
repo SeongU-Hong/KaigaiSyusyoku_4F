@@ -69,6 +69,7 @@ public class FireBaseBasement {
 
     }*/
 
+    // 게시글 업로드
     public void uploadBoard(Board board, String boardName) {
 
         String dateTime = date.format(today);
