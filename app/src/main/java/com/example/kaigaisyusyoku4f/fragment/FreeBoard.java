@@ -63,15 +63,15 @@ public class FreeBoard extends Fragment {
 //                mAdapter.clear();
                 for (DataSnapshot messageData : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
-                    String msg2 = messageData.child("write").child("title").getValue().toString();
-                    Log.e(msg2 + "", "board :");
-                    List.add(msg2);
+                         String msg2 = messageData.child("write").child("title").getValue().toString();
+                         Log.e(msg2 + "", "board :");
+                         List.add(msg2);
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
-                mAdapter.add(List);
+//                mAdapter.add(List);
                 mAdapter.notifyDataSetChanged();
-//                mListView.setSelection(mAdapter.getCount() - 1);
+                mListView.setSelection(mAdapter.getCount() - 1);
             }
 
 
