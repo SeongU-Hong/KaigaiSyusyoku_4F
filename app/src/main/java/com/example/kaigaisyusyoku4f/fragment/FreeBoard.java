@@ -18,16 +18,19 @@ import android.widget.Toast;
 import com.example.kaigaisyusyoku4f.DetailView;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
+import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class FreeBoard extends Fragment {
 
     public static ArrayList<Board> mList;
     public static ListView mListView;
     public static ArrayAdapter mAdapter;
-
+    FireBaseBasement fbb = new FireBaseBasement();
 
     public FreeBoard() {
 
@@ -39,6 +42,8 @@ public class FreeBoard extends Fragment {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
         mList = new ArrayList();
+
+
         mListView = (ListView) view.findViewById(R.id.listView1);
         mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
         mListView.setAdapter(mAdapter);
@@ -60,6 +65,7 @@ public class FreeBoard extends Fragment {
 
             }
         });
+
 
         return view;
     }

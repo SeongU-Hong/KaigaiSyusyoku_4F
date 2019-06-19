@@ -4,9 +4,31 @@ public class Board {
     public String id;
     public String title;
     public String contents;
-    public long count;
     public String dateTime;
     public String flag;
+    public long count;
+    public long replyCount;
+
+    public Board() {
+    }
+
+    public Board(String id, String title, String contents, String dateTime, String flag, long count, long replyCount) {
+        this.id = id;
+        this.title = title;
+        this.contents = contents;
+        this.dateTime = dateTime;
+        this.flag = flag;
+        this.count = count;
+        this.replyCount = replyCount;
+    }
+
+    public long getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(long replyCount) {
+        this.replyCount = replyCount;
+    }
 
     public String getId() {
         return id;
