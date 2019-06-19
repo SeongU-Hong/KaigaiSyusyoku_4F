@@ -76,5 +76,4 @@ public class InfoBoard extends Fragment {
 
         return view;
     }
-
 }
