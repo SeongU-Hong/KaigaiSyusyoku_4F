@@ -1,5 +1,6 @@
 package com.example.kaigaisyusyoku4f.fragment;
 
+import android.app.DownloadManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,8 +20,17 @@ import com.example.kaigaisyusyoku4f.DetailView;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
 import com.example.kaigaisyusyoku4f.models.Board;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class FreeBoard extends Fragment {
 
@@ -28,20 +38,48 @@ public class FreeBoard extends Fragment {
     public static ListView mListView;
     public static ArrayAdapter mAdapter;
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+    private ChildEventListener mChild;
 
     public FreeBoard() {
 
     }
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.free_board, container, false);
-        mList = new ArrayList();
+        mList = new ArrayList<Board>();
         mListView = (ListView) view.findViewById(R.id.listView1);
-        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<Board>());
         mListView.setAdapter(mAdapter);
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+                    Board msg2 = (Board) messageData.child("freeboard").child("write").getValue();
+                    mList.add(msg2);
+                    mAdapter.add(msg2);
+                    // child 내에 있는 데이터만큼 반복합니다.
+
+                }
+                mAdapter.notifyDataSetChanged();
+                mListView.setSelection(mAdapter.getCount() - 1);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -51,7 +89,8 @@ public class FreeBoard extends Fragment {
                 intent.putExtra("title",mList.get(i).getTitle());
                 //Log.d(mList.get(i).getTitle(),"title");
                 intent.putExtra("contents",mList.get(i).getContents());
-                intent.putExtra("dateTime",mList.get(i).getDateTime());
+
+                intent.putExtra("dateTime",String.valueOf(mList.get(i).getDateTime()));
                 mList.get(i).setCount(mList.get(i).getCount()+1);
                 intent.putExtra("count",String.valueOf(mList.get(i).getCount()));
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
