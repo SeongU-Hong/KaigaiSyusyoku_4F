@@ -111,9 +111,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 DrawerLayout drawer = findViewById(R.id.drawerLayout);
                 drawer.closeDrawer(GravityCompat.START);
+//                item.setChecked(true);
+//                drawerLayout.closeDrawers();
 
                 // Handle navigation view item clicks here.
                 int id = item.getItemId();
+                //@jsm 왜 온클릭 안되는지 디버깅용으로 추가
+                Log.d("onclick work?", id + "");
+                Toast.makeText(MainActivity.this, "id: " + id + "has clicked", Toast.LENGTH_LONG).show();
+
+                // 각 메뉴 클릭시 이뤄지는 이벤트
 
                 if (id == R.id.navigationItem1) {
                     Toast.makeText(getApplicationContext(), "테스트", Toast.LENGTH_SHORT).show();
@@ -121,6 +128,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     // Handle the camera action
                 } else if (id == R.id.navigationItem2) {
+//              do something
+                } else if (id == R.id.navigationUser2) {
+//              do something
+                } else if (id == R.id.navigationUser3) {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else if (id == R.id.navigationUser4) {
+//              do something
+                } else if (id == R.id.navigationUser5) {
+//              do something
                 }
 
                 return true;
