@@ -3,9 +3,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DEE6FF"
+    android:background="@color/realWhite"
     android:orientation="vertical">
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,25 +15,40 @@
             android:id="@+id/writeToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#3489B6"></android.support.v7.widget.Toolbar>
+            android:background="@color/color3">
+
+        </android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/color7">
 
             <EditText
+                android:id="@+id/freeBoard_title"
+                android:padding="5dp"
+                android:inputType="textMultiLine|textNoSuggestions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="제목"
-                android:textSize="20dp" />
+                android:textSize="25dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/edit_shape"/>
 
             <EditText
+                android:id="@+id/freeBoard_contents"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:inputType="textMultiLine|textNoSuggestions"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="start"
                 android:hint="내용"
-                android:textSize="20dp" />
+                android:textSize="25dp"
+                android:background="@drawable/edit_shape"/>
 
         </LinearLayout>
 
@@ -46,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
-        android:backgroundTint="#B9FF61"
-        android:src="@drawable/send"/>
+        android:backgroundTint="@color/color1"
+        android:src="@drawable/send"/>//
 
 </FrameLayout>

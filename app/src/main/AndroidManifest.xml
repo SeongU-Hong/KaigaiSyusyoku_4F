@@ -16,8 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteBoardActivity" />
+        <activity android:name=".WriteBoardActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".SearchBoardActivity" />
+        <activity android:name=".DetailView"/>
+        <activity android:name=".WriteComment" android:theme="@android:style/Theme.Dialog"/>
+
     </application>
 
 </manifest>
