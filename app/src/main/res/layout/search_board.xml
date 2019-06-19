@@ -3,31 +3,34 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DEE6FF">
+    android:background="@color/color7">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/searchToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFF172"
-        >
+        android:background="@color/color3">
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
         <EditText
             android:id="@+id/searchWord"
+            android:padding="5dp"
             android:layout_weight="8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/edit_shape"
             android:hint="제목"
-            android:textSize="20dp"/>
+            android:textSize="25dp"/>
 
         <Button
             android:id="@+id/searchBtn"
+            android:background="@drawable/button_shape"
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,5 +38,10 @@
             android:textSize="20dp"/>
 
     </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 </LinearLayout>
