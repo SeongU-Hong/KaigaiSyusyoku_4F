@@ -32,4 +32,5 @@ public class WriteBoardActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
