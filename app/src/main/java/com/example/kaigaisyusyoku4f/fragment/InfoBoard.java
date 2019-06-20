@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.kaigaisyusyoku4f.BoardDetailActivity;
+import com.example.kaigaisyusyoku4f.DetailActivity;
 import com.example.kaigaisyusyoku4f.InfoListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
-import com.example.kaigaisyusyoku4f.VO.ListItemTest;
 
 public class InfoBoard extends Fragment {
 
@@ -32,7 +31,7 @@ public class InfoBoard extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_board, container, false);
 
-        /*//리스트뷰
+        //리스트뷰
         // Adapter 생성
         infoListViewAdapter = new InfoListViewAdapter();
 
@@ -49,19 +48,12 @@ public class InfoBoard extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get item
-                ListItemTest item = (ListItemTest) parent.getItemAtPosition(position);
-
-                String title = item.getTitle();
-                String date = item.getDate();
-                int hit = item.getHit();
-                int comment = item.getComment();
-
+                Intent intent=new Intent(getActivity(), DetailActivity.class);
                 //여기에 코드 작성
                 // TODO : use item data.
 
                 //게시글 상세내용 페이지 이동
-                Intent intent = new Intent(getActivity(), BoardDetailActivity.class);
+
                 //해당 인텐트 실행
                 startActivity(intent);
             }
@@ -79,7 +71,7 @@ public class InfoBoard extends Fragment {
                 //새로고침 완료 후 아이콘 제거
                 swipe.setRefreshing(false);
             }
-        });*/
+        });
 
         return view;
     }
