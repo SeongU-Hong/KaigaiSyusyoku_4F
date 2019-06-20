@@ -68,6 +68,7 @@ public class FreeBoard extends Fragment {
 //                mAdapter.clear();
 
 
+
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
 
