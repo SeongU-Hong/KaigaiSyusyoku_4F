@@ -23,7 +23,6 @@ public class Board {
         this.id = id;
         this.title = title;
         this.contents = contents;
-//        dateTime.put("timestamp", ServerValue.TIMESTAMP);
         this.dateTime = dateTime;
         this.flag = flag;
         this.count = count;
