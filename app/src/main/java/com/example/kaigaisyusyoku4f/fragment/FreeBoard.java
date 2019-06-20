@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.kaigaisyusyoku4f.DetailView;
+import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.google.firebase.database.ChildEventListener;
@@ -22,8 +23,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class FreeBoard extends Fragment {
@@ -35,7 +38,7 @@ public class FreeBoard extends Fragment {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-
+    public FreeListViewAdapter fla;
     public FreeBoard() {
 
     }
@@ -49,32 +52,40 @@ public class FreeBoard extends Fragment {
         mList = new ArrayList<Board>();
         List = new ArrayList<>();
         mListView = (ListView) view.findViewById(R.id.listView1);
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         initDatabase();
-        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, List);
-        mListView.setAdapter(mAdapter);
+//        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
+//        mListView.setAdapter(mAdapter);
+        fla = new FreeListViewAdapter();
+        mListView.setAdapter(fla);
 
-
-        mReference = mDatabase.child("freeboard");
-        mReference.addValueEventListener(new ValueEventListener() {
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference("freeboard");
+        Query query = mReference.orderByChild("dateTime");
+        query.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                mAdapter.clear();
-                for (DataSnapshot messageData : dataSnapshot.getChildren()) {
+
+
+
+                for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
 
-                    String msg2 = messageData.child("title").getValue().toString();
-                    Log.e(msg2 + "", "board :");
-                    List.add(msg2);
-//                    }
+                        Board board = write.getValue(Board.class);
 
+                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+                         String dateTime = format.format(write.child("dateTime").getValue());
+                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount());
+//                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
 //                mAdapter.add(List);
-                mAdapter.notifyDataSetChanged();
-                mListView.setSelection(mAdapter.getCount() - 1);
+//                mAdapter.notifyDataSetChanged();
+//                mListView.setSelection(mAdapter.getCount() - 1);
+                  fla.notifyDataSetChanged();
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -86,17 +97,17 @@ public class FreeBoard extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
+                Board board = fla.freeList.get(i);
                 Intent intent = new Intent(getContext(), DetailView.class);
-                intent.putExtra("id", String.valueOf(mList.get(i).getId()));
-                intent.putExtra("title", mList.get(i).getTitle());
+                intent.putExtra("id", board.getId());
+                intent.putExtra("title", board.getTitle());
                 //Log.d(mList.get(i).getTitle(),"title");
-                intent.putExtra("contents", mList.get(i).getContents());
+                intent.putExtra("contents", board.getContents());
 
-                intent.putExtra("dateTime", String.valueOf(mList.get(i).getDateTime()));
-                mList.get(i).setCount(mList.get(i).getCount() + 1);
-                intent.putExtra("count", String.valueOf(mList.get(i).getCount()));
+                intent.putExtra("dateTime", board.getDateTime().toString());
+                board.setCount(board.getCount() + 1);
+                intent.putExtra("count", board.getCount());
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
-                Toast.makeText(getContext(), "클릭" + mList.get(i).getCount(), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
 
             }

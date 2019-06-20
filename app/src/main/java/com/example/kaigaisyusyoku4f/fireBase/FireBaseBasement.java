@@ -42,7 +42,7 @@ public class FireBaseBasement {
         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("freeboard").push().child("write")
+        mDatabase.child("freeboard").push()
                 .setValue(board, new DatabaseReference.CompletionListener() {
 
             @Override

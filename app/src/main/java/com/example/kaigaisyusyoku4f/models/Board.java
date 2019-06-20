@@ -11,7 +11,7 @@ public class Board {
     public String id;
     public String title;
     public String contents;
-    public Map<String,String> dateTime;
+    public Object dateTime;
     public String flag;
     public long count;
     public long replyCount;
@@ -71,11 +71,11 @@ public class Board {
     }
 
     @Exclude
-    public Map<String, String> getDateTime() {
+    public Object getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Map<String, String> dateTime) {
+    public void setDateTime(Object dateTime) {
 
         this.dateTime = dateTime;
     }
@@ -99,4 +99,6 @@ public class Board {
                 ", flag='" + flag + '\'' +
                 '}';
     }
+
+
 }

@@ -8,14 +8,21 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.kaigaisyusyoku4f.VO.ListItemTest;
+import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FreeListViewAdapter extends BaseAdapter {
 
-    ArrayList<ListItemTest> freeList = new ArrayList<>();
+    public  ArrayList<Board> freeList;
+    TextView freeListTitle;
+    TextView freeListDate;
+    TextView freeListHit;
+    TextView freeListComment;
 
     public FreeListViewAdapter() {
+        freeList = new ArrayList<>();
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -37,19 +44,19 @@ public class FreeListViewAdapter extends BaseAdapter {
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView freeListTitle = (TextView) convertView.findViewById(R.id.freeListTitle);
-        TextView freeListDate = (TextView) convertView.findViewById(R.id.freeListDate);
-        TextView freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
-        TextView freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
+        freeListTitle = (TextView) convertView.findViewById(R.id.freeListTitle);
+        freeListDate = (TextView) convertView.findViewById(R.id.freeListDate);
+        freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
+        freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListItemTest listItemTest = freeList.get(position);
+        Board listItemTest = freeList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
         freeListTitle.setText(listItemTest.getTitle());
-        freeListDate.setText(listItemTest.getDate());
-        freeListHit.setText("조회수:" + String.valueOf(listItemTest.getHit()));
-        freeListComment.setText(String.valueOf(listItemTest.getComment()));
+        freeListDate.setText(listItemTest.getDateTime().toString());
+        freeListHit.setText("조회수:" + String.valueOf(listItemTest.getCount()));
+        freeListComment.setText(String.valueOf(listItemTest.getReplyCount()));
 
         return convertView;
     }
@@ -68,12 +75,12 @@ public class FreeListViewAdapter extends BaseAdapter {
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
     public void addItem(String title, String date, int hitCount, int commentCount) {
-        ListItemTest item = new ListItemTest();
+        Board item = new Board();
 
         item.setTitle(title);
-        item.setDate(date);
-        item.setHit(hitCount);
-        item.setComment(commentCount);
+        item.setDateTime(date);
+        item.setCount(hitCount);
+        item.setReplyCount(commentCount);
 
         freeList.add(item);
     }
