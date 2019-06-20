@@ -28,7 +28,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     // google login result
-    private static final int RC_SIGN_IN = 900;
+    private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "@jsm: google login";
 
     // google login API
@@ -85,13 +85,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         // 구글로그인 버튼 응답
         Log.d(TAG, "requestCode: " + requestCode);
         if (requestCode == RC_SIGN_IN) {
-            Log.d(TAG, "rc_sign_in here: " + GoogleSignIn.getSignedInAccountFromIntent(data));
+//            Log.d(TAG, "rc_sign_in here: " + GoogleSignIn.getSignedInAccountFromIntent(data));
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 // 구글 로그인 성공
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
+
                 e.printStackTrace();
             }
         }
