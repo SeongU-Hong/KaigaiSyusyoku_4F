@@ -67,6 +67,7 @@ public class FreeBoard extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                mAdapter.clear();
 
+
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
 
