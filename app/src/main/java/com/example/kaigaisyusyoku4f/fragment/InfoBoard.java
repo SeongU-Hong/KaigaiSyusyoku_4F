@@ -1,5 +1,6 @@
 package com.example.kaigaisyusyoku4f.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.kaigaisyusyoku4f.BoardDetailAtivity;
 import com.example.kaigaisyusyoku4f.InfoListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.VO.ListItemTest;
@@ -57,6 +59,11 @@ public class InfoBoard extends Fragment {
 
                 //여기에 코드 작성
                 // TODO : use item data.
+
+                //게시글 상세내용 페이지 이동
+                Intent intent = new Intent(getActivity(), BoardDetailAtivity.class);
+                //해당 인텐트 실행
+                startActivity(intent);
             }
         });
 
@@ -76,5 +83,4 @@ public class InfoBoard extends Fragment {
 
         return view;
     }
-
 }
