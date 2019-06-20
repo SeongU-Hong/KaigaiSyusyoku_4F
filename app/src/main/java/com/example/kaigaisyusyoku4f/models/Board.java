@@ -1,10 +1,17 @@
 package com.example.kaigaisyusyoku4f.models;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ServerValue;
+
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Board {
     public String id;
     public String title;
     public String contents;
-    public String dateTime;
+    public Map<String,String> dateTime;
     public String flag;
     public long count;
     public long replyCount;
@@ -12,10 +19,11 @@ public class Board {
     public Board() {
     }
 
-    public Board(String id, String title, String contents, String dateTime, String flag, long count, long replyCount) {
+    public Board(String id, String title, String contents, Map<String,String> dateTime, String flag, long count, long replyCount) {
         this.id = id;
         this.title = title;
         this.contents = contents;
+//        dateTime.put("timestamp", ServerValue.TIMESTAMP);
         this.dateTime = dateTime;
         this.flag = flag;
         this.count = count;
@@ -62,11 +70,13 @@ public class Board {
         this.count = count;
     }
 
-    public String getDateTime() {
+    @Exclude
+    public Map<String, String> getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Map<String, String> dateTime) {
+
         this.dateTime = dateTime;
     }
 

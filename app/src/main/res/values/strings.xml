@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">해외취업 아카데미</string>
-    <string name="navMenu1">메뉴1</string>
-    <string name="navMenu2">메뉴2</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -16,4 +14,17 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="navMenuUser1">Login</string>
+    <string name="navMenuUser2">Message</string>
+    <string name="navMenuUser3">Notification</string>
+    <string name="navMenuUser4">Setting</string>
+    <string name="navMenuUser5">Logout</string>
+    <string name="navMenuBoard1">자유게시판</string>
+    <string name="navMenuBoard2">정보게시판</string>
+ㅌ
+    <!--google wants to this-->
+    <string name="loading">뭔진 모르지만 로딩</string>
+    <string name="google_status_fmt">뭔진 모르지만 google_status_fmt</string>
+    <string name="firebase_status_fmt">뭔진 모르지만 firebase_status_fmt</string>
+    <string name="signed_out">뭔진 모르지만 signed_out</string>
 </resources>

@@ -14,12 +14,9 @@ import android.widget.TextView;
 
 import com.example.kaigaisyusyoku4f.VO.CommentVO;
 import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
-import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class DetailView extends Activity {
     public static ArrayList<CommentVO> cList;
