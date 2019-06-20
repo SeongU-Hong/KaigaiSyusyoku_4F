@@ -68,14 +68,6 @@ public class InfoListViewAdapter extends BaseAdapter {
     }
 //
 //    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-//    public void addItem(String title, String date, int hitCount, int commentCount) {
-//        ListItemTest item = new ListItemTest();
-//
-//        item.setTitle(title);
-//        item.setDate(date);
-//        item.setHit(hitCount);
-//        item.setComment(commentCount);
-//
-//        infoList.add(item);
-//    }
+    public void addItem(String title, String date, int hitCount, int commentCount) {
+    }
 }

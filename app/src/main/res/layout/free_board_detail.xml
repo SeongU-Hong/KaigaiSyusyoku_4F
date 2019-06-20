@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+   <android.support.v7.widget.Toolbar
         android:id="@+id/detailToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,6 @@
             android:background="@drawable/edit_shape">
 
             <TextView
-                android:id="@+id/detail_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
@@ -65,7 +64,6 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/detail_contents"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -90,7 +88,6 @@
         android:text="댓글작성"/>
 
         <ListView
-            android:id="@+id/commentListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
