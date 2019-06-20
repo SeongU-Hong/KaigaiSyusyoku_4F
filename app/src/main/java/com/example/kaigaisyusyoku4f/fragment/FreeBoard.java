@@ -60,8 +60,8 @@ public class FreeBoard extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
-//        Query query = mReference.orderByChild("dateTime");
-        mReference.addValueEventListener(new ValueEventListener() {
+        Query query = mReference.orderByChild("dateTime");
+        query.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -69,6 +69,7 @@ public class FreeBoard extends Fragment {
 
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
+
                         Board board = write.getValue(Board.class);
 
                          SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
@@ -95,17 +96,17 @@ public class FreeBoard extends Fragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
+                Board board = fla.freeList.get(i);
                 Intent intent = new Intent(getContext(), DetailView.class);
-                intent.putExtra("id", String.valueOf(mList.get(i).getId()));
-                intent.putExtra("title", mList.get(i).getTitle());
+                intent.putExtra("id", board.getId());
+                intent.putExtra("title", board.getTitle());
                 //Log.d(mList.get(i).getTitle(),"title");
-                intent.putExtra("contents", mList.get(i).getContents());
+                intent.putExtra("contents", board.getContents());
 
-                intent.putExtra("dateTime", String.valueOf(mList.get(i).getDateTime()));
-                mList.get(i).setCount(mList.get(i).getCount() + 1);
-                intent.putExtra("count", String.valueOf(mList.get(i).getCount()));
+                intent.putExtra("dateTime", board.getDateTime().toString());
+                board.setCount(board.getCount() + 1);
+                intent.putExtra("count", board.getCount());
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
-                Toast.makeText(getContext(), "클릭" + mList.get(i).getCount(), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
 
             }

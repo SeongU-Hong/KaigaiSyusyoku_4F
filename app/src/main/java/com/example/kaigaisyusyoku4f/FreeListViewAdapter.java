@@ -15,7 +15,7 @@ import java.util.List;
 
 public class FreeListViewAdapter extends BaseAdapter {
 
-    ArrayList<Board> freeList;
+    public  ArrayList<Board> freeList;
     TextView freeListTitle;
     TextView freeListDate;
     TextView freeListHit;
