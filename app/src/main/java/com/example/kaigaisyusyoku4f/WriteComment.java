@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.kaigaisyusyoku4f.VO.CommentVO;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ public class WriteComment extends Activity {
     public WriteComment() {
         super();
     }
-    static ArrayList<CommentVO> cList = DetailView.cList;
 
     @Nullable
     @Override
@@ -42,8 +40,6 @@ public class WriteComment extends Activity {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
                 String inputDateTime = sdf.format(date);
 
-                CommentVO cVO = new CommentVO(inputReply,inputDateTime,0);
-                cList.add(cVO);
 
                 finish();
             }

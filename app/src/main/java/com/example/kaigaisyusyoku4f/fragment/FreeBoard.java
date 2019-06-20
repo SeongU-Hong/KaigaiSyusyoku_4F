@@ -32,8 +32,7 @@ import java.util.ArrayList;
 public class FreeBoard extends Fragment {
 
     public static ArrayList<Board> mList;
-    public static ListView mListView;
-    public static ArrayAdapter mAdapter;
+    private ListView mListView;
     public static ArrayList<String> List;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -52,7 +51,7 @@ public class FreeBoard extends Fragment {
         mList = new ArrayList<Board>();
         List = new ArrayList<>();
         mListView = (ListView) view.findViewById(R.id.listView1);
-        initDatabase();
+//        initDatabase();
 //        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
 //        mListView.setAdapter(mAdapter);
         fla = new FreeListViewAdapter();
@@ -65,9 +64,7 @@ public class FreeBoard extends Fragment {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                mAdapter.clear();
-
-
+                fla.clear();
 
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
@@ -84,6 +81,7 @@ public class FreeBoard extends Fragment {
 //                mAdapter.add(List);
 //                mAdapter.notifyDataSetChanged();
 //                mListView.setSelection(mAdapter.getCount() - 1);
+                  Log.e("count : ", ""+fla.getCount());
                   fla.notifyDataSetChanged();
             }
 

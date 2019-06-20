@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.kaigaisyusyoku4f.VO.ListItemTest;
 import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class FreeListViewAdapter extends BaseAdapter {
     TextView freeListHit;
     TextView freeListComment;
 
+
     public FreeListViewAdapter() {
         freeList = new ArrayList<>();
     }
@@ -30,7 +30,9 @@ public class FreeListViewAdapter extends BaseAdapter {
     public int getCount() {
         return freeList.size();
     }
-
+    public void clear(){
+        freeList.clear();
+    }
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

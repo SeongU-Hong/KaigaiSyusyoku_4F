@@ -12,22 +12,23 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.kaigaisyusyoku4f.VO.CommentVO;
-import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
+import com.example.kaigaisyusyoku4f.models.Reply;
 
 import java.util.ArrayList;
 
 public class DetailView extends Activity {
-    public static ArrayList<CommentVO> cList;
+    public static ArrayList<Reply> cList;
     static ListView cListView;
     static ArrayAdapter mAdapter;
+    public FreeListViewAdapter fla;
 
     private Toolbar toolbar;
       @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_view);
+          fla = new FreeListViewAdapter();
         Intent intent = getIntent();
         TextView detailVIew_title = findViewById(R.id.detailVIew_title);
         TextView detailVIew_contents = findViewById(R.id.detailVIew_contents);
@@ -43,6 +44,7 @@ public class DetailView extends Activity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fla.notifyDataSetChanged();
                 finish();
             }
         });

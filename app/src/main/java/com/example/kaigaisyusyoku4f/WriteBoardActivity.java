@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
 
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
@@ -52,23 +51,14 @@ public class WriteBoardActivity extends AppCompatActivity {
                 String inputTitle = title.getText().toString();
                 String inputContent = contents.getText().toString();
 
-                long now = System.currentTimeMillis();
-                Date date = new Date(now);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
-                String inputDateTime = sdf.format(date);
-
                 Board vo = new Board("1",inputTitle,inputContent,ServerValue.TIMESTAMP,"0",0,0);
 
-                mList.add(vo);
-//                System.out.println("vo더하기");
-                List.add(vo.getTitle());//test
 
                 FireBaseBasement fbb = new FireBaseBasement();
 
                 fbb.uploadBoard(vo);
 //                System.out.println("vo업로드");
 
-                fbb.testMethod();
                 finish();
         }
         });
