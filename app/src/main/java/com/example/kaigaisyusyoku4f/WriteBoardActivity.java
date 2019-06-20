@@ -55,7 +55,6 @@ public class WriteBoardActivity extends AppCompatActivity {
 
 
                 FireBaseBasement fbb = new FireBaseBasement();
-
                 fbb.uploadBoard(vo);
 //                System.out.println("vo업로드");
 

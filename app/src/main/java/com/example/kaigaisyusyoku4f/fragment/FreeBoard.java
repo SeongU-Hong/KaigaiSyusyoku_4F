@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.kaigaisyusyoku4f.DetailView;
 import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
+import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -61,7 +62,7 @@ public class FreeBoard extends Fragment {
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
         Query query = mReference.orderByChild("dateTime");
-        query.addValueEventListener(new ValueEventListener() {
+        mReference.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -74,7 +75,7 @@ public class FreeBoard extends Fragment {
 
                          SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
                          String dateTime = format.format(write.child("dateTime").getValue());
-                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount());
+                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount(),board.getKey(),board.getId(),board.getContents(),board.getFlag());
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
@@ -98,6 +99,11 @@ public class FreeBoard extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
                 Board board = fla.freeList.get(i);
+                board.setCount(board.getCount() + 1);
+                Log.e("1t","여기서 터짐");
+                FireBaseBasement fbb = new FireBaseBasement();
+                fbb.updateBoard(board);
+                Log.e("2t","아니 여기서 터짐");
 
                 Intent intent = new Intent(getContext(), DetailView.class);
                 intent.putExtra("id", board.getId());
@@ -106,8 +112,9 @@ public class FreeBoard extends Fragment {
                 intent.putExtra("contents", board.getContents());
 
                 intent.putExtra("dateTime", board.getDateTime().toString());
-                board.setCount(board.getCount() + 1);
-                intent.putExtra("count", board.getCount());
+
+                intent.putExtra("count", String.valueOf(board.getCount()));
+
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
                 startActivity(intent);
 

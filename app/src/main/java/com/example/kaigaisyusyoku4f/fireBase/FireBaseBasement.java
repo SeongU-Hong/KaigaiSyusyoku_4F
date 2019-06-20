@@ -58,7 +58,23 @@ public class FireBaseBasement {
 
         });
     }
+    public void updateBoard(Board board){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        String key = board.getKey();
+        mDatabase.child("freeboard").child(key).child("count")
+                .setValue(board.getCount(), new DatabaseReference.CompletionListener() {
 
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                        } else {
+                            System.out.println("Data saved successfully.");
+                        }
+                    }
+
+                });
+    }
     public void uploadReply(Reply reply) {
         
 

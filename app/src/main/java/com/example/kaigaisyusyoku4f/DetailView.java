@@ -44,7 +44,6 @@ public class DetailView extends Activity {
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fla.notifyDataSetChanged();
                 finish();
             }
         });

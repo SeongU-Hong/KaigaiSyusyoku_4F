@@ -103,11 +103,11 @@ public class Board {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", contents='" + contents + '\'' +
-                ", count=" + count +
-                ", dateTime='" + dateTime + '\'' +
+                ", dateTime=" + dateTime +
                 ", flag='" + flag + '\'' +
+                ", count=" + count +
+                ", replyCount=" + replyCount +
+                ", key='" + key + '\'' +
                 '}';
     }
-
-
 }

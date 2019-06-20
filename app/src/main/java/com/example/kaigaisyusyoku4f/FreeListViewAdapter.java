@@ -14,7 +14,7 @@ import java.util.List;
 
 public class FreeListViewAdapter extends BaseAdapter {
 
-    public  ArrayList<Board> freeList;
+    public static ArrayList<Board> freeList;
     TextView freeListTitle;
     TextView freeListDate;
     TextView freeListHit;
@@ -76,13 +76,17 @@ public class FreeListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String date, int hitCount, int commentCount) {
+    public void addItem(String title, String date, int hitCount, int commentCount,String key,String id,String contents,String flag) {
         Board item = new Board();
 
         item.setTitle(title);
         item.setDateTime(date);
         item.setCount(hitCount);
         item.setReplyCount(commentCount);
+        item.setKey(key);
+        item.setId(id);
+        item.setContents(contents);
+        item.setFlag(flag);
 
         freeList.add(item);
     }
