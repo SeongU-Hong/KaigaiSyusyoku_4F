@@ -98,6 +98,7 @@ public class FreeBoard extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
                 Board board = fla.freeList.get(i);
+
                 Intent intent = new Intent(getContext(), DetailView.class);
                 intent.putExtra("id", board.getId());
                 intent.putExtra("title", board.getTitle());
