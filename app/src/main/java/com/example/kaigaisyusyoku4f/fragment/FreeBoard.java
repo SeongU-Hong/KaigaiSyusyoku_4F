@@ -39,6 +39,7 @@ public class FreeBoard extends Fragment {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
     public FreeListViewAdapter fla;
+    FireBaseBasement fbb;
     public FreeBoard() {
 
     }
@@ -57,6 +58,7 @@ public class FreeBoard extends Fragment {
 //        mListView.setAdapter(mAdapter);
         fla = new FreeListViewAdapter();
         mListView.setAdapter(fla);
+        fbb = new FireBaseBasement();
 
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -101,7 +103,6 @@ public class FreeBoard extends Fragment {
                 Board board = fla.freeList.get(i);
                 board.setCount(board.getCount() + 1);
                 Log.e("1t","여기서 터짐");
-                FireBaseBasement fbb = new FireBaseBasement();
                 fbb.updateBoard(board);
                 Log.e("2t","아니 여기서 터짐");
 
@@ -116,8 +117,8 @@ public class FreeBoard extends Fragment {
                 intent.putExtra("count", String.valueOf(board.getCount()));
 
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
+                fla.notifyDataSetChanged();
                 startActivity(intent);
-
             }
         });
 
