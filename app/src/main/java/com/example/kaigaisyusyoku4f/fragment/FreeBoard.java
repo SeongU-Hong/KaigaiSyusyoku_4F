@@ -57,6 +57,7 @@ public class FreeBoard extends Fragment {
         fla = new FreeListViewAdapter();
         mListView.setAdapter(fla);
 
+
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
         Query query = mReference.orderByChild("dateTime");
