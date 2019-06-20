@@ -95,7 +95,6 @@ public class FreeBoard extends Fragment {
                   fla.notifyDataSetChanged();
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
