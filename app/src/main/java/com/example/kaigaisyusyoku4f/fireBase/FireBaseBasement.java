@@ -42,7 +42,7 @@ public class FireBaseBasement {
         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child("freeboard").push().child("write")
+        mDatabase.child("freeboard").push()
                 .setValue(board, new DatabaseReference.CompletionListener() {
 
                     @Override
@@ -57,20 +57,43 @@ public class FireBaseBasement {
                 });
     }
 
-    public void uploadReply(Reply reply) {
+    public void uploadReply(Reply reply, String path1, String path2) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(path1).push().setValue(reply, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    System.out.println("Data could not be saved " + databaseError.getMessage());
+                } else {
+                    System.out.println("Data saved successfully.");
+                }
+            }
+        });
 
-
+        mDatabase.child(path2).push().setValue(reply, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    System.out.println("Data could not be saved" + databaseError.getMessage());
+                } else {
+                    System.out.println("Data saved successfully.");
+                }
+            }
+        });
     }
 
+
+
     public void testMethod(){
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     if (child.child("freeboard").child("write").exists()){
                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
-
-
+                        child.toString().substring(mDatabase.getDatabase().getReference().toString().length()-1);
+                        child.getKey();
                         Log.e(format.format(child.child("freeboard").child("write").child("dateTime").getValue()) + "","dateTime");
 
                     }
