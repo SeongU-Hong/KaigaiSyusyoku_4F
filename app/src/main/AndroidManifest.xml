@@ -23,7 +23,7 @@
         <activity android:name=".SearchBoardActivity" />
         <activity android:name=".DetailView"/>
         <activity android:name=".WriteComment" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".BoardDetailAtivity"/>
+        <activity android:name=".BoardDetailActivity"/>
 
     </application>
 
