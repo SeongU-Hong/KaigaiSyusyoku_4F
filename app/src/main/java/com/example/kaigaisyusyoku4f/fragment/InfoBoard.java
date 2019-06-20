@@ -1,5 +1,6 @@
 package com.example.kaigaisyusyoku4f.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.kaigaisyusyoku4f.BoardDetailAtivity;
 import com.example.kaigaisyusyoku4f.InfoListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
+import com.example.kaigaisyusyoku4f.VO.ListItemTest;
 
 public class InfoBoard extends Fragment {
 
@@ -38,24 +41,29 @@ public class InfoBoard extends Fragment {
         listView.setAdapter(infoListViewAdapter);
 
         //아이쳄 추가
-//        infoListViewAdapter.addItem("정보", "20190303", 10, 2);
-//        infoListViewAdapter.addItem("좋은정보", "20190513", 8, 0);
-//        infoListViewAdapter.addItem("좋지않은정보", "20190701", 7, 1);
+        infoListViewAdapter.addItem("정보", "20190303", 10, 2);
+        infoListViewAdapter.addItem("좋은정보", "20190513", 8, 0);
+        infoListViewAdapter.addItem("좋지않은정보", "20190701", 7, 1);
 
         //리스트뷰 클릭이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
-//                ListItemTest item = (ListItemTest) parent.getItemAtPosition(position);
-//
-//                String title = item.getTitle();
-//                String date = item.getDate();
-//                int hit = item.getHit();
-//                int comment = item.getComment();
-//
-//                //여기에 코드 작성
-//                // TODO : use item data.
+                ListItemTest item = (ListItemTest) parent.getItemAtPosition(position);
+
+                String title = item.getTitle();
+                String date = item.getDate();
+                int hit = item.getHit();
+                int comment = item.getComment();
+
+                //여기에 코드 작성
+                // TODO : use item data.
+
+                //게시글 상세내용 페이지 이동
+                Intent intent = new Intent(getActivity(), BoardDetailAtivity.class);
+                //해당 인텐트 실행
+                startActivity(intent);
             }
         });
 
@@ -75,5 +83,4 @@ public class InfoBoard extends Fragment {
 
         return view;
     }
-
 }
