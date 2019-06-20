@@ -78,7 +78,6 @@ public class FreeBoard extends Fragment {
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
-
 //                mAdapter.add(List);
 //                mAdapter.notifyDataSetChanged();
 //                mListView.setSelection(mAdapter.getCount() - 1);

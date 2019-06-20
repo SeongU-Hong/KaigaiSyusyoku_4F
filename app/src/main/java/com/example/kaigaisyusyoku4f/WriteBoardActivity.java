@@ -14,14 +14,11 @@ import android.widget.TextView;
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Board;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Map;
 
 public class WriteBoardActivity extends AppCompatActivity {
 
@@ -32,8 +29,8 @@ public class WriteBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            setContentView(R.layout.write_board);
-        toolbar =(Toolbar) findViewById(R.id.writeToolbar);
+        setContentView(R.layout.write_board);
+        toolbar = (Toolbar) findViewById(R.id.writeToolbar);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,7 +40,7 @@ public class WriteBoardActivity extends AppCompatActivity {
 
         FloatingActionButton send = findViewById(R.id.sendFab);
 
-        send.setOnClickListener(new View.OnClickListener(){
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 TextView title = findViewById(R.id.freeBoard_title);
@@ -53,20 +50,19 @@ public class WriteBoardActivity extends AppCompatActivity {
 
                 Board vo = new Board("1",inputTitle,inputContent,ServerValue.TIMESTAMP,"0",0,0);
 
-
                 FireBaseBasement fbb = new FireBaseBasement();
 
                 fbb.uploadBoard(vo);
 //                System.out.println("vo업로드");
 
                 finish();
-        }
+            }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
