@@ -22,13 +22,16 @@ public class DetailView extends Activity {
     static ListView cListView;
     static ArrayAdapter mAdapter;
     public FreeListViewAdapter fla;
-
+    String key;
+    String replyCount;
+    String id;
     private Toolbar toolbar;
       @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail_view);
-          fla = new FreeListViewAdapter();
+        fla = new FreeListViewAdapter();
+
         Intent intent = getIntent();
         TextView detailVIew_title = findViewById(R.id.detailVIew_title);
         TextView detailVIew_contents = findViewById(R.id.detailVIew_contents);
@@ -39,6 +42,10 @@ public class DetailView extends Activity {
         detailVIew_contents.setText(intent.getStringExtra("contents"));
         detailVIew_dateTime.setText(intent.getStringExtra("dateTime"));
         detailVIew_hitCount.setText(intent.getStringExtra("count"));
+        key = intent.getStringExtra("key");
+        replyCount = intent.getStringExtra("replyCount");
+        id = intent.getStringExtra("id");
+
 
         Button goBack = findViewById(R.id.goBack);
         goBack.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +59,9 @@ public class DetailView extends Activity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),WriteComment.class);
+                intent.putExtra("key",key);
+                intent.putExtra("replyCount",replyCount);
+
                 startActivity(intent);
             }
         });

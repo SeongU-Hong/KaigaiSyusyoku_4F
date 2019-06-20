@@ -16,6 +16,15 @@ public class Board {
     public long count;
     public long replyCount;
     public String key;
+    public Object reply;
+
+    public Object getReply() {
+        return reply;
+    }
+
+    public void setReply(Object reply) {
+        this.reply = reply;
+    }
 
     public String getKey() {
         return key;

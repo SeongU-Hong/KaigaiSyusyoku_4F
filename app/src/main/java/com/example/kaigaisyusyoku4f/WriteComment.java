@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
+import com.example.kaigaisyusyoku4f.models.Board;
+import com.example.kaigaisyusyoku4f.models.Reply;
+import com.google.firebase.database.ServerValue;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,13 +25,18 @@ public class WriteComment extends Activity {
         super();
     }
 
+    String key;
+    String replyCount;
     @Nullable
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.write_comment);
         Intent intent = getIntent();
-
+        key = intent.getStringExtra("key");
+        replyCount = intent.getStringExtra("replyCount");
+//        Integer.parseInt(replyCount)+1;
+//        System.out.println("key = "+ key);
         Button writeReply = findViewById(R.id.writeReply);
 
         writeReply.setOnClickListener(new View.OnClickListener(){
@@ -35,11 +45,11 @@ public class WriteComment extends Activity {
                 TextView reply = findViewById(R.id.reply);
                 String inputReply = reply.getText().toString();
 
-                long now = System.currentTimeMillis();
-                Date date = new Date(now);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
-                String inputDateTime = sdf.format(date);
+                Reply rp = new Reply("1",inputReply,ServerValue.TIMESTAMP,"0");
 
+                FireBaseBasement fbb = new FireBaseBasement();
+                fbb.uploadReply(key,rp);
+//                fbb.plusReply(key,replyCount);
 
                 finish();
             }

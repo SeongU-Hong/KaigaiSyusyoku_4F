@@ -75,11 +75,40 @@ public class FireBaseBasement {
 
                 });
     }
-    public void uploadReply(Reply reply) {
-        
+    public void uploadReply(String key,Reply reply) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("freeboard").child(key).child("replyList").push()
+                .setValue(reply, new DatabaseReference.CompletionListener() {
+
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                        } else {
+                            System.out.println("Data saved successfully.");
+                        }
+                    }
+
+                });
 
     }
+    public void plusReply(String key,String replyCount){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("freeboard").child(key).child("replyCount")
+                .setValue(replyCount, new DatabaseReference.CompletionListener() {
 
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            System.out.println("Data could not be saved " + databaseError.getMessage());
+                        } else {
+                            System.out.println("Data saved successfully.");
+                        }
+                    }
+
+                });
+
+    }
     public void testMethod(){
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override

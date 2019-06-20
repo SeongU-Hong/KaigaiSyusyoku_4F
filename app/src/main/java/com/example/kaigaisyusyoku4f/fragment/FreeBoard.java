@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,10 +73,15 @@ public class FreeBoard extends Fragment {
 
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
-
                         Board board = write.getValue(Board.class);
+                        int rere2 = 0;
+                        for(DataSnapshot rere : write.child("replyList").child("rere").getChildren()){
+                            rere2 = (int)rere.getChildrenCount();
+                        }
+                        Log.e(rere2+"","rere2");
+                        board.setReplyCount(write.child("replyList").getChildrenCount()+write.child("replyList").child("rere").getChildrenCount());
 
-                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                          String dateTime = format.format(write.child("dateTime").getValue());
                          fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount(),board.getKey(),board.getId(),board.getContents(),board.getFlag());
 //                    }
@@ -85,7 +91,7 @@ public class FreeBoard extends Fragment {
 //                mAdapter.add(List);
 //                mAdapter.notifyDataSetChanged();
 //                mListView.setSelection(mAdapter.getCount() - 1);
-                  Log.e("count : ", ""+fla.getCount());
+//                  Log.e("count : ", ""+fla.getCount());
                   fla.notifyDataSetChanged();
             }
 
@@ -102,9 +108,9 @@ public class FreeBoard extends Fragment {
             public void onItemClick(AdapterView parent, View view, int i, long l) {
                 Board board = fla.freeList.get(i);
                 board.setCount(board.getCount() + 1);
-                Log.e("1t","여기서 터짐");
+//                Log.e("1t","여기서 터짐");
                 fbb.updateBoard(board);
-                Log.e("2t","아니 여기서 터짐");
+//                Log.e("2t","아니 여기서 터짐");
 
                 Intent intent = new Intent(getContext(), DetailView.class);
                 intent.putExtra("id", board.getId());
@@ -115,13 +121,14 @@ public class FreeBoard extends Fragment {
                 intent.putExtra("dateTime", board.getDateTime().toString());
 
                 intent.putExtra("count", String.valueOf(board.getCount()));
+                intent.putExtra("key",board.getKey());
+                intent.putExtra("replyCount",board.getReplyCount());
 
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
-                fla.notifyDataSetChanged();
                 startActivity(intent);
+
             }
         });
-
         return view;
     }
 
