@@ -55,10 +55,10 @@ public class DetailView extends Activity {
             }
         });
 
-        cList = new ArrayList();
-        cListView = (ListView) findViewById(R.id.commentList);
-        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cList);
-        cListView.setAdapter(mAdapter);
+//        cList = new ArrayList();
+//        cListView = (ListView) findViewById(R.id.commentList);
+//        mAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cList);
+//        cListView.setAdapter(mAdapter);
 
 
     }
