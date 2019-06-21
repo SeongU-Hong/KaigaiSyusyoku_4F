@@ -124,7 +124,6 @@ public class FreeBoard extends Fragment {
 
             }
         });
-
         return view;
     }
 
