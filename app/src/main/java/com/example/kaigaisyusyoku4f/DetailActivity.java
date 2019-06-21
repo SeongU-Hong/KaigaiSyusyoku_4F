@@ -14,6 +14,9 @@ public class DetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FreeListViewAdapter fla;
+    String key;
+    String replyCount;
+    String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,11 +35,18 @@ public class DetailActivity extends AppCompatActivity {
         detailVIew_dateTime.setText(intent.getStringExtra("dateTime"));
         detailVIew_hitCount.setText(String.valueOf(intent.getLongExtra("count",0)));
 
+        //댓글
+        key = intent.getStringExtra("key");
+        replyCount = intent.getStringExtra("replyCount");
+        id = intent.getStringExtra("id");
+
         Button goCommentWrite = findViewById(R.id.commentWrite);
         goCommentWrite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),WriteComment.class);
+                intent.putExtra("key",key);
+                intent.putExtra("replyCount",replyCount);
                 startActivity(intent);
             }
         });
