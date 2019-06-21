@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,7 @@ public class FreeBoard extends Fragment {
     private DatabaseReference mReference;
     private ChildEventListener mChild;
     public FreeListViewAdapter fla;
+    private SwipeRefreshLayout swipe;
     public FreeBoard() {
 
     }
@@ -55,6 +57,19 @@ public class FreeBoard extends Fragment {
         fla = new FreeListViewAdapter();
         mListView.setAdapter(fla);
 
+        //새로고침
+        swipe=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefresh1);
+        //색변경
+        swipe.setColorSchemeResources(R.color.color8);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //코드 입력
+
+                //새로고침 완료 후 아이콘 제거
+                swipe.setRefreshing(false);
+            }
+        });
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
