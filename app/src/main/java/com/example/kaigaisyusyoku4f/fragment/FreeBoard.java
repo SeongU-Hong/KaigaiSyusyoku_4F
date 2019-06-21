@@ -10,11 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.example.kaigaisyusyoku4f.DetailView;
+import com.example.kaigaisyusyoku4f.DetailActivity;
 import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.models.Board;
@@ -97,7 +95,7 @@ public class FreeBoard extends Fragment {
             public void onItemClick(AdapterView parent, View view, int i, long l) {
                 Board board = fla.freeList.get(i);
 
-                Intent intent = new Intent(getContext(), DetailView.class);
+                Intent intent = new Intent(getContext(), DetailActivity.class);
                 intent.putExtra("id", board.getId());
                 intent.putExtra("title", board.getTitle());
                 //Log.d(mList.get(i).getTitle(),"title");
