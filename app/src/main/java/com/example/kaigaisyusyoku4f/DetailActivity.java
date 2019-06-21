@@ -30,7 +30,7 @@ public class DetailActivity extends AppCompatActivity {
         detailVIew_title.setText(intent.getStringExtra("title"));
         detailVIew_contents.setText(intent.getStringExtra("contents"));
         detailVIew_dateTime.setText(intent.getStringExtra("dateTime"));
-        detailVIew_hitCount.setText(intent.getStringExtra("count"));
+        detailVIew_hitCount.setText(String.valueOf(intent.getLongExtra("count",0)));
 
         Button goCommentWrite = findViewById(R.id.commentWrite);
         goCommentWrite.setOnClickListener(new View.OnClickListener(){

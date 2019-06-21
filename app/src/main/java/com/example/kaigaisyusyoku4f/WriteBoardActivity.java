@@ -5,25 +5,22 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
-import com.example.kaigaisyusyoku4f.VO.FreeboardVO;
 
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.google.firebase.database.ServerValue;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class WriteBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    static ArrayList<Board> mList = FreeBoard.mList;
+    static ArrayList<String> List = FreeBoard.List;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +30,7 @@ public class WriteBoardActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         toolbar.setTitle("해외취업 아카데미");
         toolbar.setSubtitle("글작성");
 
@@ -46,9 +44,7 @@ public class WriteBoardActivity extends AppCompatActivity {
                 String inputTitle = title.getText().toString();
                 String inputContent = contents.getText().toString();
 
-                Board vo = new Board("1", inputTitle, inputContent, ServerValue.TIMESTAMP, "0", 0, 0);
-
-//                System.out.println("vo더하기");
+                Board vo = new Board("1",inputTitle,inputContent,ServerValue.TIMESTAMP,"0",0,0);
 
                 FireBaseBasement fbb = new FireBaseBasement();
 
