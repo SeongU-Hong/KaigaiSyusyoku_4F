@@ -5,20 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.google.firebase.database.ServerValue;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class WriteBoardActivity extends AppCompatActivity {
 
