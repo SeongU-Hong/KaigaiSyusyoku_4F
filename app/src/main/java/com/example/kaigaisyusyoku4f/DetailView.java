@@ -47,6 +47,7 @@ public class DetailView extends Activity {
         id = intent.getStringExtra("id");
 
 
+
         Button goBack = findViewById(R.id.goBack);
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
