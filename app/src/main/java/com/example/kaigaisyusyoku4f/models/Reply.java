@@ -3,8 +3,18 @@ package com.example.kaigaisyusyoku4f.models;
 public class Reply {
     public String id;
     public String reply;
-    public String dateTime;
+    public Object dateTime;
     public String flag;
+
+    public Reply() {
+    }
+
+    public Reply(String id, String reply, Object dateTime, String flag) {
+        this.id = id;
+        this.reply = reply;
+        this.dateTime = dateTime;
+        this.flag = flag;
+    }
 
     public String getId() {
         return id;
@@ -22,11 +32,11 @@ public class Reply {
         this.reply = reply;
     }
 
-    public String getDateTime() {
+    public Object getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
+    public void setDateTime(Object dateTime) {
         this.dateTime = dateTime;
     }
 
