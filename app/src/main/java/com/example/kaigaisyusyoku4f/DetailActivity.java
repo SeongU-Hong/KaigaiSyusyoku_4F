@@ -7,16 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class DetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private FreeListViewAdapter fla;
-    String key;
-    String replyCount;
-    String id;
+    private CommentListViewAdapter commentListViewAdapter;
+    private ListView listView;
+    private String key;
+    private String replyCount;
+    private String id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +51,34 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),WriteComment.class);
                 intent.putExtra("key",key);
                 intent.putExtra("replyCount",replyCount);
+                startActivity(intent);
+            }
+        });
+
+        //댓글 리스트
+        //리스트뷰
+        // Adapter 생성
+        commentListViewAdapter = new CommentListViewAdapter();
+
+        // 리스트뷰 참조 및 Adapter달기
+        listView = (ListView)findViewById(R.id.commentListView);
+        listView.setAdapter(commentListViewAdapter);
+
+        //아이쳄 추가
+        commentListViewAdapter.addItem("정보", "20190303", "아아!");
+        commentListViewAdapter.addItem("좋은정보", "20190513", "아오");
+
+        //리스트뷰 클릭이벤트
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                Intent intent=new Intent(DetailActivity.this, DetailActivity.class);
+                //여기에 코드 작성
+                // TODO : use item data.
+
+                //게시글 상세내용 페이지 이동
+
+                //해당 인텐트 실행
                 startActivity(intent);
             }
         });
