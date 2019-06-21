@@ -61,6 +61,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         freeListComment.setText(String.valueOf(listItemTest.getReplyCount()));
 
         return convertView;
+
     }
 
     // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
