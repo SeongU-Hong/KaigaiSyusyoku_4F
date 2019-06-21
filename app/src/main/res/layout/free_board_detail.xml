@@ -93,6 +93,7 @@
         android:text="댓글작성"/>
 
         <ListView
+            android:id="@+id/commentListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
