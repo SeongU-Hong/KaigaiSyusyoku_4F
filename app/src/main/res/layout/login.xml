@@ -1,51 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<!--
 
-
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
-            android:scaleType="centerCrop"
+            android:id="@+id/googleIcon"
+            android:contentDescription="string/desc_firebase_lockup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/google_title_text"
+            />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signed_out" />
+
+        <TextView
+            android:id="@+id/detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Firebase User ID: 123456789abc" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:visibility="visible"
-            tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+            tools:visibility="gone" />
 
         <LinearLayout
+            android:id="@+id/signOutAndDisconnect"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/signOutButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="海　外　就　職　４Ｆ"
-                android:textColor="#3F51B5" />
+                android:layout_weight="1"
+                android:text="@string/sign_out"
+                />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_googleSignIn"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/disconnectButton"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="false"
-                android:layout_gravity="center"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"></com.google.android.gms.common.SignInButton>
-
+                android:layout_weight="1"
+                android:text="@string/disconnect"
+                />
         </LinearLayout>
 
-    </FrameLayout>
-
+    </RelativeLayout>
+-->
 
 </LinearLayout>
