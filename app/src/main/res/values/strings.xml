@@ -21,10 +21,28 @@
     <string name="navMenuUser5">Logout</string>
     <string name="navMenuBoard1">자유게시판</string>
     <string name="navMenuBoard2">정보게시판</string>
-ㅌ
+
     <!--google wants to this-->
-    <string name="loading">뭔진 모르지만 로딩</string>
-    <string name="google_status_fmt">뭔진 모르지만 google_status_fmt</string>
-    <string name="firebase_status_fmt">뭔진 모르지만 firebase_status_fmt</string>
-    <string name="signed_out">뭔진 모르지만 signed_out</string>
+    <string name="hint_user_id">User ID</string>
+    <string name="get_custom_token">Get Token</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="loading">Loading…</string>
+    <string name="custom_token">Custom Token</string>
+    <string name="signed_in">Signed In</string>
+    <string name="signed_out">Signed Out</string>
+    <string name="token_null">Token: null</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="status_code_sent">Code Sent</string>
+    <string name="status_verification_failed">Verification failed</string>
+    <string name="status_verification_succeeded">Verification succeeded</string>
+    <string name="status_sign_in_failed">Sign-in failed</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="firebase_user_management">Firebase User Management</string>
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="google_title_text">Google Sign In</string>
+    <string name="id_fmt">User ID: %s</string>
+    <string name="email_fmt">Email: %s</string>
 </resources>

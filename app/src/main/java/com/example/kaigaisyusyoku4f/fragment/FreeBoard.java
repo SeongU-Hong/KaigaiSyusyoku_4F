@@ -176,7 +176,7 @@ public class FreeBoard extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mReference.removeEventListener(mChild);
+//        mReference.removeEventListener(mChild);
     }
 }
 

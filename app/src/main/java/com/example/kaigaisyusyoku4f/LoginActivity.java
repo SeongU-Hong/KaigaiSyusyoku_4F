@@ -48,7 +48,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         // 파이어베이스 인증 객체 선언
         mAuth = FirebaseAuth.getInstance();
-        buttonGoogle = findViewById(R.id.btn_googleSignIn);
+        buttonGoogle = findViewById(R.id.signInButton);
 
         // Google 로그인을 앱에 통합
         // GoogleSignInOptions 개체를 구성할 때 requestIdToken을 호출
