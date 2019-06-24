@@ -151,20 +151,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     } else if (id == R.id.navigationItem2) {
                         viewPager.setCurrentItem(1);
                     } else if (id == R.id.navigationUser2) {
-                        Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser3) {
     //              do something
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser4) {
     //              do something
-                        Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getUid(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser5) {
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                         signOut();
-
-                        Intent intent = getIntent();
                         finish();
-                        startActivity(intent);
                     }
                 return true;
             }
