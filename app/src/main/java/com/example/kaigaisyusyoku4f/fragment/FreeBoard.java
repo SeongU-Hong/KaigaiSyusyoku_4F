@@ -95,7 +95,6 @@ public class FreeBoard extends Fragment {
                     Toast.makeText(getActivity(),"마지막 똥글", Toast.LENGTH_SHORT).show();
                 }
             }
-
         });
 
        mDatabase = FirebaseDatabase.getInstance();
