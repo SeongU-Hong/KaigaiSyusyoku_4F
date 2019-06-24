@@ -38,7 +38,7 @@ public class FreeBoard extends Fragment {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-    public FreeListViewAdapter fla;
+    public static FreeListViewAdapter fla;
     private SwipeRefreshLayout swipe;
     FireBaseBasement fbb;
     public FreeBoard() {
@@ -77,8 +77,8 @@ public class FreeBoard extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
-        Query query = mReference.orderByChild("dateTime");
-        mReference.addValueEventListener(new ValueEventListener() {
+        Query query = mReference.orderByChild("dateTime").limitToLast(5);
+        query.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -123,9 +123,9 @@ public class FreeBoard extends Fragment {
                 //Log.d(mList.get(i).getTitle(),"title");
                 intent.putExtra("contents", board.getContents());
 
-                intent.putExtra("dateTime", board.getDateTime().toString());
+                intent.putExtra("dateTime", "등록일 "+board.getDateTime().toString());
 
-                intent.putExtra("count", String.valueOf(board.getCount()));
+                intent.putExtra("count", "조회수 "+board.getCount());
                 intent.putExtra("key",board.getKey());
                 intent.putExtra("replyCount",board.getReplyCount());
 

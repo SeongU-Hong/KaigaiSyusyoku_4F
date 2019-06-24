@@ -2,6 +2,7 @@ package com.example.kaigaisyusyoku4f;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
+import com.example.kaigaisyusyoku4f.models.Reply;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.SimpleDateFormat;
+
 public class DetailActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
@@ -21,13 +32,15 @@ public class DetailActivity extends AppCompatActivity {
     private String key;
     private String replyCount;
     private String id;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_detail);
 
-        fla = new FreeListViewAdapter();
+        fla = FreeBoard.fla;
         Intent intent = getIntent();
         TextView detailVIew_title = findViewById(R.id.detailTile);
         TextView detailVIew_contents = findViewById(R.id.detailContent);
@@ -37,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
         detailVIew_title.setText(intent.getStringExtra("title"));
         detailVIew_contents.setText(intent.getStringExtra("contents"));
         detailVIew_dateTime.setText(intent.getStringExtra("dateTime"));
-        detailVIew_hitCount.setText(String.valueOf(intent.getLongExtra("count",0)));
+        detailVIew_hitCount.setText(intent.getStringExtra("count"));
 
         //댓글
         key = intent.getStringExtra("key");
@@ -63,11 +76,31 @@ public class DetailActivity extends AppCompatActivity {
         // 리스트뷰 참조 및 Adapter달기
         listView = (ListView)findViewById(R.id.commentListView);
         listView.setAdapter(commentListViewAdapter);
-
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference("freeboard").child(key).child("replyList");
         //아이쳄 추가
-        commentListViewAdapter.addItem("정보", "20190303", "아아!");
-        commentListViewAdapter.addItem("좋은정보", "20190513", "아오");
+//        commentListViewAdapter.addItem("정보", "20190303", "아아!");
+//        commentListViewAdapter.addItem("좋은정보", "20190513", "아오");
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                commentListViewAdapter.clear();
 
+                for(DataSnapshot reply : dataSnapshot.getChildren()){
+                    Reply comment = reply.getValue(Reply.class);
+                    SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
+                    String dateTime = format.format(comment.dateTime);
+                    commentListViewAdapter.addItem(comment.getId(),dateTime,comment.getReply());
+                }
+                commentListViewAdapter.notifyDataSetInvalidated();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
         //리스트뷰 클릭이벤트
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,6 +129,7 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                fla.notifyDataSetChanged();
                 finish();
                 return true;
         }
