@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.kaigaisyusyoku4f.DetailActivity;
 import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
@@ -38,13 +40,14 @@ public class FreeBoard extends Fragment {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-    public FreeListViewAdapter fla;
+    public static FreeListViewAdapter fla;
     private SwipeRefreshLayout swipe;
+    private boolean lastItemVisibleFlag = false;        //화면에 리스트의 마지막 아이템이 보여지는지 체크
+
     FireBaseBasement fbb;
     public FreeBoard() {
 
     }
-
 
     @Nullable
     @Override
@@ -69,36 +72,58 @@ public class FreeBoard extends Fragment {
             @Override
             public void onRefresh() {
                 //코드 입력
-
                 //새로고침 완료 후 아이콘 제거
                 swipe.setRefreshing(false);
             }
         });
 
-        mDatabase = FirebaseDatabase.getInstance();
+
+        //리스트뷰가 바닥에 닿을 경우
+        mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //현재 화면에 보이는 첫번째 리스트 아이템의 번호(firstVisibleItem) + 현재 화면에 보이는 리스트 아이템의 갯수(visibleItemCount)가 리스트 전체의 갯수(totalItemCount) -1 보다 크거나 같을때
+                lastItemVisibleFlag = (totalItemCount > 0) && (firstVisibleItem + visibleItemCount >= totalItemCount);
+            }
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                //OnScrollListener.SCROLL_STATE_IDLE은 스크롤이 이동하다가 멈추었을때 발생되는 스크롤 상태입니다.
+                //즉 스크롤이 바닦에 닿아 멈춘 상태에 처리를 하겠다는 뜻
+                if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastItemVisibleFlag) {
+                    //TODO 화면이 바닦에 닿을때 처리
+                    Toast.makeText(getActivity(),"마지막 똥글", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+       mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
+
         Query query = mReference.orderByChild("dateTime");
-        mReference.addValueEventListener(new ValueEventListener() {
+
+
+        query.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 fla.clear();
-
+                int replyCount = 0;
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
                         Board board = write.getValue(Board.class);
 
+                        replyCount = (int)write.child("replyList").getChildrenCount();
+
                          SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                          String dateTime = format.format(write.child("dateTime").getValue());
-                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount(),board.getKey(),board.getId(),board.getContents(),board.getFlag());
+                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),replyCount,board.getKey(),board.getId(),board.getContents(),board.getFlag());
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
 //                mAdapter.add(List);
 //                mAdapter.notifyDataSetChanged();
 //                mListView.setSelection(mAdapter.getCount() - 1);
-                  Log.e("count : ", ""+fla.getCount());
-                  fla.notifyDataSetChanged();
+                fla.notifyDataSetChanged();
             }
 
             @Override
@@ -123,9 +148,9 @@ public class FreeBoard extends Fragment {
                 //Log.d(mList.get(i).getTitle(),"title");
                 intent.putExtra("contents", board.getContents());
 
-                intent.putExtra("dateTime", board.getDateTime().toString());
+                intent.putExtra("dateTime", "등록일 "+board.getDateTime().toString());
 
-                intent.putExtra("count", String.valueOf(board.getCount()));
+                intent.putExtra("count", "조회수 "+ board.getCount());
                 intent.putExtra("key",board.getKey());
                 intent.putExtra("replyCount",board.getReplyCount());
 
@@ -146,7 +171,7 @@ public class FreeBoard extends Fragment {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+                fla.notifyDataSetChanged();
             }
 
             @Override

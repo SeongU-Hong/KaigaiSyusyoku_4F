@@ -1,6 +1,7 @@
 package com.example.kaigaisyusyoku4f;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FreeListViewAdapter extends BaseAdapter {
@@ -51,6 +53,8 @@ public class FreeListViewAdapter extends BaseAdapter {
         freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
         freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
 
+        Collections.reverse(freeList);
+
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         Board listItemTest = freeList.get(position);
 
@@ -88,7 +92,6 @@ public class FreeListViewAdapter extends BaseAdapter {
         item.setId(id);
         item.setContents(contents);
         item.setFlag(flag);
-
         freeList.add(item);
     }
 }
