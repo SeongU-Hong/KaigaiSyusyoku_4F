@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import com.example.kaigaisyusyoku4f.DetailActivity;
 import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
+import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,8 +38,9 @@ public class FreeBoard extends Fragment {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
     private ChildEventListener mChild;
-    public FreeListViewAdapter fla;
+    public static FreeListViewAdapter fla;
     private SwipeRefreshLayout swipe;
+    FireBaseBasement fbb;
     public FreeBoard() {
 
     }
@@ -56,6 +59,7 @@ public class FreeBoard extends Fragment {
 //        mListView.setAdapter(mAdapter);
         fla = new FreeListViewAdapter();
         mListView.setAdapter(fla);
+        fbb = new FireBaseBasement();
 
         //새로고침
         swipe=(SwipeRefreshLayout)view.findViewById(R.id.swipeRefresh1);
@@ -73,7 +77,7 @@ public class FreeBoard extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
-        Query query = mReference.orderByChild("dateTime");
+        Query query = mReference.orderByChild("dateTime").limitToLast(5);
         query.addValueEventListener(new ValueEventListener() {
 
             @Override
@@ -82,12 +86,11 @@ public class FreeBoard extends Fragment {
 
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
-
                         Board board = write.getValue(Board.class);
 
-                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+                         SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                          String dateTime = format.format(write.child("dateTime").getValue());
-                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount());
+                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount(),board.getKey(),board.getId(),board.getContents(),board.getFlag());
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
@@ -109,6 +112,10 @@ public class FreeBoard extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
                 Board board = fla.freeList.get(i);
+                board.setCount(board.getCount() + 1);
+//                Log.e("1t","여기서 터짐");
+                fbb.updateBoard(board);
+//                Log.e("2t","아니 여기서 터짐");
 
                 Intent intent = new Intent(getContext(), DetailActivity.class);
                 intent.putExtra("id", board.getId());
@@ -116,9 +123,12 @@ public class FreeBoard extends Fragment {
                 //Log.d(mList.get(i).getTitle(),"title");
                 intent.putExtra("contents", board.getContents());
 
-                intent.putExtra("dateTime", board.getDateTime().toString());
-                board.setCount(board.getCount() + 1);
-                intent.putExtra("count", board.getCount());
+                intent.putExtra("dateTime", "등록일 "+board.getDateTime().toString());
+
+                intent.putExtra("count", "조회수 "+board.getCount());
+                intent.putExtra("key",board.getKey());
+                intent.putExtra("replyCount",board.getReplyCount());
+
                 //Log.d(String.valueOf(mList.get(i).getHitCount()),"hitCount");
                 startActivity(intent);
 
@@ -166,7 +176,7 @@ public class FreeBoard extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        mReference.removeEventListener(mChild);
+        mReference.removeEventListener(mChild);
     }
 }
 
