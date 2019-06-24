@@ -78,6 +78,7 @@ public class FreeBoard extends Fragment {
             }
         });
 
+
         //리스트뷰가 바닥에 닿을 경우
         mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
