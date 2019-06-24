@@ -69,7 +69,6 @@ public class FreeBoard extends Fragment {
             @Override
             public void onRefresh() {
                 //코드 입력
-
                 //새로고침 완료 후 아이콘 제거
                 swipe.setRefreshing(false);
             }
@@ -77,34 +76,36 @@ public class FreeBoard extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
-        Query query = mReference.orderByChild("dateTime").limitToLast(5);
+        Query query = mReference.orderByChild("dateTime");
         query.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 fla.clear();
-
+                int replyCount = 0;
                 for (DataSnapshot write : dataSnapshot.getChildren()) {
 //                    if(messageData.child("freeboard").child("write").exists()){
                         Board board = write.getValue(Board.class);
 
+                        replyCount = (int)write.child("replyList").getChildrenCount();
+
                          SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                          String dateTime = format.format(write.child("dateTime").getValue());
-                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),(int)board.getReplyCount(),board.getKey(),board.getId(),board.getContents(),board.getFlag());
+                         fla.addItem(board.getTitle(),dateTime,(int)board.getCount(),replyCount,board.getKey(),board.getId(),board.getContents(),board.getFlag());
 //                    }
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
 //                mAdapter.add(List);
 //                mAdapter.notifyDataSetChanged();
 //                mListView.setSelection(mAdapter.getCount() - 1);
-                  Log.e("count : ", ""+fla.getCount());
-                  fla.notifyDataSetChanged();
+                fla.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
 
 
@@ -125,7 +126,7 @@ public class FreeBoard extends Fragment {
 
                 intent.putExtra("dateTime", "등록일 "+board.getDateTime().toString());
 
-                intent.putExtra("count", "조회수 "+board.getCount());
+                intent.putExtra("count", "조회수 "+ board.getCount());
                 intent.putExtra("key",board.getKey());
                 intent.putExtra("replyCount",board.getReplyCount());
 
@@ -146,7 +147,7 @@ public class FreeBoard extends Fragment {
 
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
+                fla.notifyDataSetChanged();
             }
 
             @Override
