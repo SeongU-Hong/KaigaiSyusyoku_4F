@@ -99,7 +99,7 @@ public class FreeBoard extends Fragment {
        mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
 
-        Query query = mReference.orderByChild("dateTime").limitToLast(10);
+        Query query = mReference.orderByChild("dateTime").limitToLast(5);
 
         query.addValueEventListener(new ValueEventListener() {
 

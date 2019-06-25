@@ -41,6 +41,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         final int pos = position;
         final Context context = parent.getContext();
 
+
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,9 +54,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
         freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
 
-//        if(position==freeList.size()){
-//            Collections.reverse(freeList);
-//        }
+
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         Board listItemTest = freeList.get(position);
