@@ -25,7 +25,6 @@ public class FreeListViewAdapter extends BaseAdapter {
 
     public FreeListViewAdapter() {
 //        freeList = new ArrayList<>();
-        Collections.reverse(freeList);
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -54,6 +53,9 @@ public class FreeListViewAdapter extends BaseAdapter {
         freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
         freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
 
+//        if(position==freeList.size()){
+//            Collections.reverse(freeList);
+//        }
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         Board listItemTest = freeList.get(position);
@@ -92,6 +94,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         item.setId(id);
         item.setContents(contents);
         item.setFlag(flag);
+
         freeList.add(item);
     }
 }
