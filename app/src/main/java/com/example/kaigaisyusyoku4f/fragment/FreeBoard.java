@@ -15,11 +15,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.kaigaisyusyoku4f.DetailActivity;
-import com.example.kaigaisyusyoku4f.FreeListViewAdapter;
+import com.example.kaigaisyusyoku4f.adapter.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
-import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.models.Board;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,12 +39,6 @@ public class FreeBoard extends Fragment {
     private boolean lastItemVisibleFlag = false;        //화면에 리스트의 마지막 아이템이 보여지는지 체크
 
 
-    public FreeBoard() {
-
-    }
-
-
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,9 +47,6 @@ public class FreeBoard extends Fragment {
         mList = new ArrayList<>();
         mListView = (ListView) view.findViewById(R.id.listView1);
 
-//        initDatabase();
-//        mAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mList);
-//        mListView.setAdapter(mAdapter);
         fla = new FreeListViewAdapter();
         mListView.setAdapter(fla);
 

@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.kaigaisyusyoku4f.DetailActivity;
-import com.example.kaigaisyusyoku4f.InfoListViewAdapter;
+import com.example.kaigaisyusyoku4f.adapter.InfoListViewAdapter;
 import com.example.kaigaisyusyoku4f.R;
 
 public class InfoBoard extends Fragment {

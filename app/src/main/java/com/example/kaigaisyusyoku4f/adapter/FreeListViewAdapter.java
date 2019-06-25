@@ -1,4 +1,4 @@
-package com.example.kaigaisyusyoku4f;
+package com.example.kaigaisyusyoku4f.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.models.Board;
 
 import java.util.ArrayList;

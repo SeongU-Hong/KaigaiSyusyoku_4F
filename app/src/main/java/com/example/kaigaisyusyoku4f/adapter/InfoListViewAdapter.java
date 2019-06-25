@@ -1,4 +1,4 @@
-package com.example.kaigaisyusyoku4f;
+package com.example.kaigaisyusyoku4f.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

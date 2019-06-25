@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kaigaisyusyoku4f.adapter.CommentListViewAdapter;
+import com.example.kaigaisyusyoku4f.adapter.FreeListViewAdapter;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Reply;
 import com.google.firebase.database.DataSnapshot;
@@ -29,23 +31,37 @@ public class DetailActivity extends AppCompatActivity {
     private FreeListViewAdapter fla;
     private CommentListViewAdapter commentListViewAdapter;
     private ListView listView;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
     private String key;
     private String replyCount;
     private String id;
-    private FirebaseDatabase mDatabase;
-    private DatabaseReference mReference;
+
+    private TextView detailVIew_title;
+    private TextView detailVIew_contents;
+    private TextView detailVIew_hitCount;
+    private TextView detailVIew_dateTime;
+    private Button goCommentWrite;
+
+    void set() {
+        detailVIew_title = findViewById(R.id.detailTile);
+        detailVIew_contents = findViewById(R.id.detailContent);
+        detailVIew_hitCount = findViewById(R.id.detailHit);
+        detailVIew_dateTime = findViewById(R.id.detailDate);
+        goCommentWrite = findViewById(R.id.commentWrite);
+        toolbar = findViewById(R.id.detailToolbar);
+        listView = findViewById(R.id.commentListView);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_detail);
+        set();
 
         fla = FreeBoard.fla;
         Intent intent = getIntent();
-        TextView detailVIew_title = findViewById(R.id.detailTile);
-        TextView detailVIew_contents = findViewById(R.id.detailContent);
-        TextView detailVIew_hitCount = findViewById(R.id.detailHit);
-        TextView detailVIew_dateTime = findViewById(R.id.detailDate);
 
         detailVIew_title.setText(intent.getStringExtra("title"));
         detailVIew_contents.setText(intent.getStringExtra("contents"));
@@ -57,47 +73,41 @@ public class DetailActivity extends AppCompatActivity {
         replyCount = intent.getStringExtra("replyCount");
         id = intent.getStringExtra("id");
 
-        Button goCommentWrite = findViewById(R.id.commentWrite);
-        goCommentWrite.setOnClickListener(new View.OnClickListener(){
+        goCommentWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),WriteComment.class);
-                intent.putExtra("key",key);
-                intent.putExtra("replyCount",replyCount);
+                Intent intent = new Intent(getApplicationContext(), WriteComment.class);
+                intent.putExtra("key", key);
+                intent.putExtra("replyCount", replyCount);
                 startActivity(intent);
             }
         });
 
-        //댓글 리스트
-        //리스트뷰
-        // Adapter 생성
         commentListViewAdapter = new CommentListViewAdapter();
 
         // 리스트뷰 참조 및 Adapter달기
-        listView = (ListView)findViewById(R.id.commentListView);
         listView.setAdapter(commentListViewAdapter);
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard").child(key).child("replyList");
-        //아이쳄 추가
-//        commentListViewAdapter.addItem("정보", "20190303", "아아!");
-//        commentListViewAdapter.addItem("좋은정보", "20190513", "아오");
+
+
+        //파이어베이스 아이템 로드
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 commentListViewAdapter.clear();
 
-                for(DataSnapshot reply : dataSnapshot.getChildren()){
+                for (DataSnapshot reply : dataSnapshot.getChildren()) {
                     Reply comment = reply.getValue(Reply.class);
                     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                     String dateTime = format.format(comment.dateTime);
-                    commentListViewAdapter.addItem(comment.getId(),dateTime,comment.getReply());
+                    commentListViewAdapter.addItem(comment.getId(), dateTime, comment.getReply());
                 }
                 commentListViewAdapter.notifyDataSetInvalidated();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
 
         });
@@ -105,7 +115,7 @@ public class DetailActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Intent intent=new Intent(DetailActivity.this, DetailActivity.class);
+                Intent intent = new Intent(DetailActivity.this, DetailActivity.class);
                 //여기에 코드 작성
                 // TODO : use item data.
 
@@ -117,7 +127,6 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         //툴바
-        toolbar =(Toolbar) findViewById(R.id.detailToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

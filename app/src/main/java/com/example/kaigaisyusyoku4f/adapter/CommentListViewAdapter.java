@@ -1,4 +1,4 @@
-package com.example.kaigaisyusyoku4f;
+package com.example.kaigaisyusyoku4f.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.kaigaisyusyoku4f.R;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.example.kaigaisyusyoku4f.models.Reply;
 
@@ -15,32 +16,30 @@ import java.util.ArrayList;
 public class CommentListViewAdapter extends BaseAdapter {
 
     public static ArrayList<Reply> commnetList;
-    TextView commentIdentity;
-    TextView commentDate;
-    TextView commentContent;
+    private TextView commentIdentity;
+    private TextView commentDate;
+    private TextView commentContent;
 
 
     public CommentListViewAdapter() {
         commnetList = new ArrayList<>();
     }
 
-    // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
     @Override
     public int getCount() {
         return commnetList.size();
     }
+
     public void clear(){
         commnetList.clear();
     }
+
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
-        final Context context = parent.getContext();
-
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.free_board_comment_item, parent, false);
         }
 
@@ -49,13 +48,11 @@ public class CommentListViewAdapter extends BaseAdapter {
         commentDate = (TextView) convertView.findViewById(R.id.commentDate);
         commentContent = (TextView) convertView.findViewById(R.id.commentContent);
 
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        Reply listItemTest = commnetList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        commentIdentity.setText(listItemTest.getId());
-        commentDate.setText(listItemTest.getDateTime().toString());
-        commentContent.setText(listItemTest.getReply());
+        commentIdentity.setText(commnetList.get(position).getId());
+        commentDate.setText(commnetList.get(position).getDateTime().toString());
+        commentContent.setText(commnetList.get(position).getReply());
 
         return convertView;
     }
@@ -79,8 +76,6 @@ public class CommentListViewAdapter extends BaseAdapter {
         item.setId(id);
         item.setDateTime(date);
         item.setReply(content);
-
-
         commnetList.add(item);
     }
 }

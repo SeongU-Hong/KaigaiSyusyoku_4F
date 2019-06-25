@@ -8,7 +8,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 
-//import com.google.firebase.quickstart.auth.R;
 
 public class BaseActivity extends AppCompatActivity {
 

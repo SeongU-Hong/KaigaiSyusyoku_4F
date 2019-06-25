@@ -72,7 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         // Login, Views for login status msgs.
         mStatusTextView = findViewById(R.id.status);
         mDetailTextView = findViewById(R.id.detail);
-        mDetailTextView = findViewById(R.id.current_user_email);
+//        mDetailTextView = findViewById(R.id.current_user_email);
 
         loginChk();
 //        while (chker == 0) loginChk();
@@ -136,15 +136,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 DrawerLayout drawer = findViewById(R.id.drawerLayout);
                 drawer.closeDrawer(GravityCompat.START);
-//                item.setChecked(true);
-//                drawerLayout.closeDrawers();
 
-                // Handle navigation view item clicks here.
                 int id = item.getItemId();
-                //@jsm 왜 온클릭 안되는지 디버깅용으로 추가
-//                Log.d("onclick work?", id + "");
-//                Toast.makeText(MainActivity.this, "id: " + id + "has clicked", Toast.LENGTH_LONG).show();
-
                 // 각 메뉴 클릭시 이뤄지는 이벤트
                     if (id == R.id.navigationItem1) {
                         viewPager.setCurrentItem(0);
@@ -153,10 +146,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     } else if (id == R.id.navigationUser2) {
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser3) {
-    //              do something
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser4) {
-    //              do something
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getUid(), Toast.LENGTH_SHORT).show();
                     } else if (id == R.id.navigationUser5) {
                         Toast.makeText(getApplicationContext(), "현재 접속자: " + user.getEmail(), Toast.LENGTH_SHORT).show();
@@ -211,7 +202,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
     public void anim() {
-
         if (isFabOpen) {
             fab1.startAnimation(fab_close);
             fab2.startAnimation(fab_close);
