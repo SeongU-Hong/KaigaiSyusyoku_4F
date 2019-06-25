@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.models.Board;
 import com.example.kaigaisyusyoku4f.models.Reply;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ServerValue;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +26,7 @@ public class WriteComment extends Activity {
     public WriteComment() {
         super();
     }
-
+    private FirebaseAuth mAuth;
     String key;
     String replyCount;
     @Nullable
@@ -45,7 +47,12 @@ public class WriteComment extends Activity {
                 TextView reply = findViewById(R.id.reply);
                 String inputReply = reply.getText().toString();
 
-                Reply rp = new Reply("1",inputReply,ServerValue.TIMESTAMP,"0");
+                //현재 로그인한 유저정보
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String uid = user.getUid();
+
+                Reply rp = new Reply(uid,inputReply,ServerValue.TIMESTAMP,"0");
 
                 FireBaseBasement fbb = new FireBaseBasement();
                 fbb.uploadReply(key,rp);

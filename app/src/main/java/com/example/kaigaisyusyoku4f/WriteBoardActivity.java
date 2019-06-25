@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.example.kaigaisyusyoku4f.fireBase.FireBaseBasement;
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Board;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ServerValue;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 public class WriteBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private FirebaseAuth mAuth;
     static ArrayList<Board> mList = FreeBoard.mList;
 
     @Override
@@ -43,11 +46,16 @@ public class WriteBoardActivity extends AppCompatActivity {
                 String inputTitle = title.getText().toString();
                 String inputContent = contents.getText().toString();
 
-                Board vo = new Board("1",inputTitle,inputContent,ServerValue.TIMESTAMP,"0",0,0);
+                //현재 로그인한 유저정보 가져오기
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseUser user = mAuth.getCurrentUser();
+                String uid = user.getUid();
+
+                Board vo = new Board(uid,inputTitle,inputContent,ServerValue.TIMESTAMP,"0",0,0);
 
                 FireBaseBasement fbb = new FireBaseBasement();
-
                 fbb.uploadBoard(vo);
+
 //                System.out.println("vo업로드");
 
                 finish();

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.example.kaigaisyusyoku4f.fragment.FreeBoard;
 import com.example.kaigaisyusyoku4f.models.Reply;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,6 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     private String id;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +55,13 @@ public class DetailActivity extends AppCompatActivity {
         detailVIew_dateTime.setText(intent.getStringExtra("dateTime"));
         detailVIew_hitCount.setText(intent.getStringExtra("count"));
 
+
+
         //댓글
         key = intent.getStringExtra("key");
         replyCount = intent.getStringExtra("replyCount");
-        id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id"); //글작성자 id
+
 
         Button goCommentWrite = findViewById(R.id.commentWrite);
         goCommentWrite.setOnClickListener(new View.OnClickListener(){
@@ -64,6 +70,7 @@ public class DetailActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),WriteComment.class);
                 intent.putExtra("key",key);
                 intent.putExtra("replyCount",replyCount);
+                intent.putExtra("id",id);
                 startActivity(intent);
             }
         });
@@ -90,7 +97,14 @@ public class DetailActivity extends AppCompatActivity {
                     Reply comment = reply.getValue(Reply.class);
                     SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
                     String dateTime = format.format(comment.dateTime);
-                    commentListViewAdapter.addItem(comment.getId(),dateTime,comment.getReply());
+                    String cId = "";
+                    //댓글의 작성자가 게시글의 작성자일 경우 "작성자", 아닐 경우 "anonymous"
+                    if(comment.getId().equals(id)){
+                        cId = "작성자";
+                    }else{
+                        cId = "anonymous";
+                    }
+                    commentListViewAdapter.addItem(cId,dateTime,comment.getReply());
                 }
                 commentListViewAdapter.notifyDataSetInvalidated();
             }
