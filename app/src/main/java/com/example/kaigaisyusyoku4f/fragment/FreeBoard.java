@@ -39,10 +39,10 @@ public class FreeBoard extends Fragment {
     public  static FreeListViewAdapter fla;
     private SwipeRefreshLayout swipe;
     private boolean lastItemVisibleFlag = false;        //화면에 리스트의 마지막 아이템이 보여지는지 체크
-
+    public static int i;
 
     public FreeBoard() {
-
+        i = 10;
     }
 
 
@@ -90,14 +90,47 @@ public class FreeBoard extends Fragment {
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && lastItemVisibleFlag) {
                     //TODO 화면이 바닦에 닿을때 처리
                     Toast.makeText(getActivity(), "마지막 똥글", Toast.LENGTH_SHORT).show();
+                    i +=10;
+                    Query query = mReference.orderByChild("dateTime").limitToLast(i);
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            fla.clear();
+                            int replyCount = 0;
+                            for (DataSnapshot write : dataSnapshot.getChildren()) {
+                                Board board = write.getValue(Board.class);
+
+                                replyCount = (int) write.child("replyList").getChildrenCount();
+
+                                SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd aaa HH:mm:ss");
+                                String dateTime = format.format(write.child("dateTime").getValue());
+                                fla.addItem(board.
+                                                getTitle(),
+                                        dateTime,
+                                        (int) board.getCount(),
+                                        replyCount,
+                                        board.getKey(),
+                                        board.getId(),
+                                        board.getContents(),
+                                        board.getFlag());
+                            }
+                            fla.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         });
 
+
         mDatabase = FirebaseDatabase.getInstance();
         mReference = mDatabase.getReference("freeboard");
 
-        Query query = mReference.orderByChild("dateTime");
+        Query query = mReference.orderByChild("dateTime").limitToLast(i);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
