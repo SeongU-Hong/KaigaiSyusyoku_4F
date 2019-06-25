@@ -20,7 +20,6 @@ public class WriteBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     static ArrayList<Board> mList = FreeBoard.mList;
-    static ArrayList<String> List = FreeBoard.List;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

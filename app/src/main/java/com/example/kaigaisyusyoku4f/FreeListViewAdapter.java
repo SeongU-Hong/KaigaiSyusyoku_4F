@@ -16,15 +16,15 @@ import java.util.List;
 
 public class FreeListViewAdapter extends BaseAdapter {
 
-    public static ArrayList<Board> freeList = new ArrayList<>();
-    TextView freeListTitle;
-    TextView freeListDate;
-    TextView freeListHit;
-    TextView freeListComment;
+    public static ArrayList<Board> freeList;
+    private TextView freeListTitle;
+    private TextView freeListDate;
+    private TextView freeListHit;
+    private TextView freeListComment;
 
 
     public FreeListViewAdapter() {
-//        freeList = new ArrayList<>();
+        freeList = new ArrayList<>();
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -32,15 +32,16 @@ public class FreeListViewAdapter extends BaseAdapter {
     public int getCount() {
         return freeList.size();
     }
-    public void clear(){
+
+    public void clear() {
         freeList.clear();
     }
+
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         final Context context = parent.getContext();
-
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
@@ -54,7 +55,7 @@ public class FreeListViewAdapter extends BaseAdapter {
         freeListHit = (TextView) convertView.findViewById(R.id.freeListHit);
         freeListComment = (TextView) convertView.findViewById(R.id.freeListComment);
 
-
+//        Collections.reverse(freeList);
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         Board listItemTest = freeList.get(position);
@@ -82,7 +83,7 @@ public class FreeListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String date, int hitCount, int commentCount,String key,String id,String contents,String flag) {
+    public void addItem(String title, String date, int hitCount, int commentCount, String key, String id, String contents, String flag) {
         Board item = new Board();
 
         item.setTitle(title);
@@ -93,7 +94,6 @@ public class FreeListViewAdapter extends BaseAdapter {
         item.setId(id);
         item.setContents(contents);
         item.setFlag(flag);
-
-        freeList.add(item);
+        freeList.add(0,item);
     }
 }
